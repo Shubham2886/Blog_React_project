@@ -1,0 +1,48 @@
+/* header styles */
+.header-container {
+    background: #333;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px; /* Adjust the height of the logo */
+    padding-left: 10px;
+}
+
+
+
+
+
+/* navigation styles */
+ul {
+    list-style: none;
+    display: flex;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+/* align the navigation to the top right */
+nav {
+    margin-left: auto;
+}
+
+li {
+    margin-left: 10px; /* Add margin between list items */
+}
+
+li:first-child {
+    margin-left: 0; /* Remove margin from the first list item */
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
