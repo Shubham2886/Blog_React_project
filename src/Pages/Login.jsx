@@ -46,6 +46,7 @@ const Login = () => {
                 const expiresIn = 3600; // 1 hour in seconds
                 const expirationTime = new Date().getTime() + expiresIn * 1000;
                 localStorage.setItem('tokenExpiration', expirationTime);
+                localStorage.setItem('isLoggedIn', true);
                 login();
                 setOpen(true); // Open the Snackbar for successful login
                 setTimeout(() => {

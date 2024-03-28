@@ -13,6 +13,7 @@ const Logout = () => {
     // Clear token and related data from local storage
     localStorage.removeItem('token');
     localStorage.removeItem('tokenExpiration');
+    localStorage.setItem('isLoggedIn', false);
     logout();
     // Redirect to the login page
     setTimeout(() => {

@@ -1,5 +1,5 @@
 // AuthContext.js
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext();
 
@@ -9,6 +9,14 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Check if user is logged in on component mount
+    const userLoggedIn = localStorage.getItem('isLoggedIn') === 'true'; // Check local storage
+    //console.log(userLoggedIn);
+    setIsLoggedIn(userLoggedIn);
+  }, []);
+
 
   const login = () => {
     // Your login logic here
