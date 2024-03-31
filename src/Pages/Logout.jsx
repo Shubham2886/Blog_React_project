@@ -14,7 +14,7 @@ const Logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('tokenExpiration');
     localStorage.setItem('isLoggedIn', false);
-    logout();
+    logout(); // Call the logout function
     // Redirect to the login page
     setTimeout(() => {
       navigate('/login');
@@ -22,7 +22,7 @@ const Logout = () => {
 
     // Open Snackbar to notify user about logout
     setOpenSnackbar(true);
-  }, [navigate]);
+  }, [navigate, logout]); // Include logout in the dependency array
 
   const handleSnackbarClose = (event, reason) => {
     if (reason === 'clickaway') {

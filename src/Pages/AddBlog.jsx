@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createBlog } from '../Services/blogService';
 import { Snackbar, Alert as MuiAlert } from '@mui/material';
-
-import '../assets/addblog.css';
+import { TextField, Button, Typography, Grid, Container, Paper } from '@mui/material'; // Import Material UI components
+import { useAuth } from '../Components/AuthContext';
 
 const AddBlog = () => {
     const navigate = useNavigate();
+    const { isLoggedIn } = useAuth();
     const [blogData, setBlogData] = useState({
         blogtitle: '',
         blogcontent: '',
@@ -16,6 +17,12 @@ const AddBlog = () => {
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
     const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+
+    useEffect(() => {
+        if (!isLoggedIn) {
+            navigate('/login');
+        }
+    }, [isLoggedIn, navigate]);
 
     const handleChange = (e) => {
         if (e.target.name === 'blogimage') {
@@ -54,7 +61,6 @@ const AddBlog = () => {
                 setSnackbarMessage('Please fill in all fields.');
                 return;
             }
-            
 
             // Validation for title length
             if (blogData.blogtitle.length > 150) {
@@ -63,13 +69,14 @@ const AddBlog = () => {
                 setSnackbarMessage('Title length should not exceed 150 characters.');
                 return;
             }
-            console.log(blogData.blogcontent.length)
+
             if (blogData.blogcontent.length > 5000) {
                 setOpenSnackbar(true);
                 setSnackbarSeverity('error');
                 setSnackbarMessage('Blog content length should not exceed 5000 characters.');
                 return;
             }
+
             if (blogData.blogimage.size > 2 * 1024 * 1024 || !['image/png', 'image/jpeg', 'image/jpg'].includes(blogData.blogimage.type)) {
                 setOpenSnackbar(true);
                 setSnackbarSeverity('error');
@@ -116,34 +123,83 @@ const AddBlog = () => {
     };
 
     return (
-        <div className="container">
-            <h1>Add New Blog</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="blogtitle">Title:</label>
-                    <input type="text" id="blogtitle" name="blogtitle" value={blogData.blogtitle} onChange={handleChange} />
-                </div>
-                <div>
-                    <label htmlFor="blogcontent">Content:</label>
-                    <textarea id="blogcontent" name="blogcontent" value={blogData.blogcontent} onChange={handleChange}></textarea>
-                </div>
-                <div>
-                    <label htmlFor="blogcategory">Category:</label>
-                    <input type="text" id="blogcategory" name="blogcategory" value={blogData.blogcategory} onChange={handleChange} />
-                </div>
-                <div>
-                    <label htmlFor="blogimage">Image:</label>
-                    <input type="file" id="blogimage" name="blogimage" accept="image/*" onChange={handleChange} />
-                </div>
-                <button type="submit">Submit</button>
-            </form>
+        <Container maxWidth="md" sx={{ mt: 4 }}> {/* Material UI Container component */}
+            <Typography variant="h4" align="center" gutterBottom>Add New Blog</Typography> {/* Material UI Typography component */}
+            <Paper elevation={3} sx={{ padding: 3, backgroundColor: '#f5f5f5' }}> {/* Material UI Paper component */}
+                <form onSubmit={handleSubmit}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <Typography variant="subtitle1" sx={{ fontWeight: 'bold', fontSize: 16 }}>Title</Typography>
+                            <TextField
+                                fullWidth
+                                multiline
+                                id="blogtitle"
+                                name="blogtitle"
+                                value={blogData.blogtitle}
+                                onChange={handleChange}
+                                InputLabelProps={{ shrink: true }} // Adjusting InputLabelProps
+                            />
+                        </Grid>
+                        <Grid item xs={12} sx={{ mt: 2 }}>
+                            <Typography variant="subtitle1" sx={{ fontWeight: 'bold', fontSize: 16 }}>Content</Typography>
+                            <TextField
+                                fullWidth
+                                multiline
+                                rows={6}
+                                id="blogcontent"
+                                name="blogcontent"
+                                value={blogData.blogcontent}
+                                onChange={handleChange}
+                                InputLabelProps={{ shrink: true }} // Adjusting InputLabelProps
+                            />
+                        </Grid>
+                        <Grid item xs={12} sx={{ mt: 2 }}>
+                            <Typography variant="subtitle1" sx={{ fontWeight: 'bold', fontSize: 16 }}>Category</Typography>
+                            <TextField
+                                fullWidth
+                                multiline
+                                id="blogcategory"
+                                name="blogcategory"
+                                value={blogData.blogcategory}
+                                onChange={handleChange}
+                                InputLabelProps={{ shrink: true }} // Adjusting InputLabelProps
+                            />
+                        </Grid>
+                        <Grid item xs={12} sx={{ mt: 2 }}>
+                            <input
+                                accept="image/*"
+                                id="blogimage"
+                                name="blogimage"
+                                type="file"
+                                style={{ display: 'none' }}
+                                onChange={handleChange}
+                            />
+                            <label htmlFor="blogimage">
+                                <Button variant="contained" component="span">
+                                    Upload Image
+                                </Button>
+                            </label>
+                            {blogData.blogimage && (
+                                <Typography variant="body1" sx={{ fontSize: 14, fontWeight: 'bold', marginTop: 2 }}>
+                                    {blogData.blogimage.name} {/* Displaying the selected file name */}
+                                </Typography>
+                            )}
+                        </Grid>
+                        <Grid item xs={12} sx={{ mt: 2 }}>
+                            <Button type="submit" variant="contained" color="primary">
+                                Submit
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </form>
+            </Paper>
 
             <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleSnackbarClose}>
                 <MuiAlert elevation={6} variant="filled" onClose={handleSnackbarClose} severity={snackbarSeverity}>
                     {snackbarMessage}
                 </MuiAlert>
             </Snackbar>
-        </div>
+        </Container>
     );
 };
 

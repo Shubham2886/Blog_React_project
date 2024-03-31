@@ -1,53 +1,64 @@
 .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  label {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  input[type="text"],
-  textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button[type="submit"] {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Snackbar styles */
-  .MuiAlert-filledSuccess {
-    background-color: #4caf50;
-  }
-  
-  .MuiAlert-filledError {
-    background-color: #f44336;
-  }
-  
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 0; /* Remove padding to utilize more space */
+  background-color: #e65252;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
+  display: grid;
+  gap: 20px;
+}
+
+form div {
+  display: grid;
+  gap: 10px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type='text'],
+input[type='file'] {
+  width: calc(100% - 22px); /* Adjusted width for smaller inputs */
+  padding: 15px;
+  border: 1px solid #c8bcc4;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+textarea {
+  width: calc(100% - 22px); /* Adjusted width for textarea */
+  height: 200px; /* Adjusted height for textarea */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+button[type='submit'] {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[type='submit']:hover {
+  background-color: #0056b3;
+}
+
+
+

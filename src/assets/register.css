@@ -12,9 +12,6 @@
 }
 
 /* Add styles for black background */
-body {
-    background-color: black;
-}
 
 .register-form {
     display: flex;

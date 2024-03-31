@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
-import { Snackbar, Alert as MuiAlert } from '@mui/material';
+import * as React from 'react';
+import { useState } from 'react';
+import { Snackbar, Alert as MuiAlert, Modal, Box, TextField, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Components/AuthContext'; //
+import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
+import Avatar from '@mui/material/Avatar';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 import '../assets/login.css'; // Import the CSS file for styling
 
 const Login = () => {
@@ -10,7 +18,9 @@ const Login = () => {
         password: ""
     });
 
+    const [openModal, setOpenModal] = useState(false); // State to control the modal
     const [open, setOpen] = useState(false);
+    const [otp, setOtp] = useState(""); // State to store OTP input
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
     const { login } = useAuth(); // Use login function from useAuth
@@ -23,23 +33,28 @@ const Login = () => {
         }));
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleOTPVerification = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/auth/login', {
+            const response = await fetch('http://localhost:3000/api/auth/verify-login-otp', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({
+                    email: formData.email,
+                    otp: otp
+                }),
             });
 
             if (!response.ok) {
-                throw new Error('Failed to login');
+                throw new Error('Failed to verify OTP');
             }
 
             const data = await response.json();
             if (data.status === "ok") {
+                // Handle successful OTP verification
+            
+                setOpenModal(false); // Close the OTP verification modal
                 // Handle successful login
                 localStorage.setItem('token', data.jwt_token);
                 // Set expiration timestamp (adjust expiresIn based on your token expiry logic)
@@ -54,7 +69,45 @@ const Login = () => {
                     navigate('/'); // Redirect to '/'
                 }, 3000);
             } else {
-                throw new Error(data.message || 'Failed to login');
+                throw new Error(data.message || 'Failed to verify OTP');
+            }
+        } catch (error) {
+            console.error('Error verifying OTP:', error);
+            setErrorMessage(error.message || 'An error occurred during OTP verification');
+        }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch('http://localhost:3000/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.message === "OTP sent to email for login") {
+                    // Handle successful login
+                    
+                    setOpenModal(true); // Open the OTP verification modal
+                } else {
+                    throw new Error('Unexpected response from server');
+                }
+            } else if (response.status === 400) {
+                const responseData = await response.json(); // Read response body as JSON
+                let errorMessage;
+                if (responseData.message === "User not found") {
+                    errorMessage = "User not found. Please check your credentials and try again.";
+                } else {
+                    errorMessage = responseData.message || 'Failed to login';
+                }
+                setErrorMessage(errorMessage);
+            } else {
+                throw new Error('Server Error');
             }
         } catch (error) {
             console.error('Error logging in:', error);
@@ -62,22 +115,114 @@ const Login = () => {
         }
     };
 
+    const handleRegister = () => {
+        navigate('/register'); // Navigate to the registration page
+    };
+
     return (
         <div className="login-container">
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit} className="login-form">
-                <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder='email' value={formData.email} onChange={handleChange} required />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder='password' value={formData.password} onChange={handleChange} required />
-                </div>
-                <div className="form-group">
-                    <button type="submit">Login</button>
-                </div>
-            </form>
+            <Snackbar open={errorMessage !== ""} onClose={() => setErrorMessage("")}>
+                <MuiAlert elevation={6} variant="filled" severity="error">
+                    {errorMessage}
+                </MuiAlert>
+            </Snackbar>
+            <Modal open={openModal} onClose={() => setOpenModal(false)}>
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: 400,
+                        bgcolor: '#f0f0f0',
+                        borderRadius: '8px',
+                        boxShadow: 24,
+                        p: 4,
+                    }}
+                >
+                    <h2 style={{ marginBottom: '16px' }}>Verify Login OTP</h2>
+                    <p style={{ marginBottom: '8px' }}>Please check your email for the OTP.</p>
+                    <TextField
+                        sx={{ mb: 2 }}
+                        label="OTP"
+                        multiline
+                        variant="outlined"
+                        value={otp}
+                        onChange={(e) => setOtp(e.target.value)}
+                        fullWidth
+                    />
+                    <Button variant="contained" onClick={handleOTPVerification}>Verify OTP</Button>
+                </Box>
+            </Modal>
+
+            <Container component="main" maxWidth="sm">
+                <CssBaseline />
+                <Box
+                    sx={{
+                        marginTop: 8,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Sign in
+                    </Typography>
+                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: '100%' }}>
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            multiline
+                            type="email"
+                            id="email"
+                            label="Email Address"
+                            name="email"
+                            autoComplete="email"
+                            autoFocus
+                            variant="standard"
+                            onChange={handleChange}
+                            value={formData.email}
+                        />
+                        <TextField
+
+                            margin="normal"
+                            required
+                            fullWidth
+                            multiline
+                            id="standard-password-input"
+                            label="Password"
+                            type="password"
+                            autoComplete="current-password"
+                            name="password"
+                            variant="standard"
+                            onChange={handleChange}
+                            value={formData.password}
+                            InputProps={{
+                                style: { fontSize: 15 }, // Increase font size for password
+                            }}
+                        />
+                        <FormControlLabel
+                            control={<Checkbox value="remember" color="primary" />}
+                            label="Remember me"
+                        />
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 1 }}
+                        >
+                            Sign In
+                        </Button>
+                        <Typography variant="body2" align="center">
+                            Don't have an account? <Button color="primary" onClick={handleRegister}>Register here</Button>
+                        </Typography>
+                    </Box>
+                </Box>
+            </Container>
             <Snackbar open={open}>
                 <MuiAlert elevation={6} variant="filled" severity="success">
                     Login Successful

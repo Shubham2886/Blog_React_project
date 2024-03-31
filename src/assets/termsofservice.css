@@ -1,0 +1,61 @@
+/* termsofservice.css */
+
+.terms-of-service-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px 40px; /* Add padding to the right and left sides */
+    margin-top: 20px; /* Add margin from the top */
+    background-color: #0a7425;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.terms-of-service-container h2 {
+    color:#22d661;
+}
+
+.terms-of-service-container hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+.terms-of-service-container h3 {
+    color: #33a5e7;
+    margin-top: 20px;
+}
+
+.terms-of-service-container p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.terms-of-service-container ul {
+    margin-bottom: 20px;
+}
+
+.terms-of-service-container ul li {
+    margin-bottom: 5px;
+}
+
+.terms-of-service-container ul li::before {
+    content: '\2022'; /* Bullet point */
+    color: #666;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+.terms-of-service-container ul li:last-child {
+    margin-bottom: 0;
+}
+
+.terms-of-service-container a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.terms-of-service-container a:hover {
+    text-decoration: underline;
+}

@@ -1,24 +1,18 @@
 /* login.css */
 
-.login-container {
-    width: 100%;
-    max-width: 400px;
-    margin: 50px auto; /* Add space between header and form */
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.9); /* Set background color with opacity */
-    color: black; /* Set text color to black */
-}
 
-/* Add styles for black background */
-body {
-    background-color: black;
+
+.login-container {
+    max-width: 400px;
+    margin: 50px auto 0 auto; /* Added space from the top */
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #e85151; /* Set the background color to a dark shade of black */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .login-form {
-    display: flex;
-    flex-direction: column;
+    margin-top: 20px;
 }
 
 .form-group {
@@ -26,38 +20,39 @@ body {
 }
 
 label {
+    display: block;
+    margin-bottom: 5px;
     font-weight: bold;
 }
 
-input[type="email"],
-input[type="password"] {
+input[type="text"],
+input[type="email"] {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 1px solid #555; /* Set the border color to a light shade of gray */
+    border-radius: 4px;
     box-sizing: border-box;
-    font-size: 16px;
-    margin-top: 5px;
-    transition: border-color 0.3s ease-in-out;
+    background-color: #222; /* Set the input background color to a darker shade */
+    color: white; /* Set input text color to white */
 }
 
-input[type="email"]:hover,
-input[type="password"]:hover {
-    border-color: #007bff;
-}
-
-button {
+button[type="submit"] {
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
-    color: #fff;
+    background-color: #4caf50;
+    color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #0056b3;
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.error-message {
+    color: #f44336;
+    margin-top: 10px;
+    font-size: 14px;
 }

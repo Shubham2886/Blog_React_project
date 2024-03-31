@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Button, Menu, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import logo from '../assets/logo-no-background.png'; // Import the logo image
 import { useAuth } from './AuthContext'; // Import the useAuth hook
-
+import '../assets/footer.css'
 const Header = () => {
     const { isLoggedIn } = useAuth(); // Use the useAuth hook to get authentication state
 
@@ -75,4 +75,19 @@ const Header = () => {
     );
 };
 
-export default Header;
+const Footer = () => {
+    return (
+        <footer className="footer-container">
+            <div className="footer-content">
+                <p className="footer-text">&copy; 2024 Daily Blogs. All Rights Reserved.</p>
+                <div className="footer-links">
+                    <Link to="/privacy-policy" className="footer-link">Privacy Policy</Link>
+                    <span className="footer-separator"> | </span>
+                    <Link to="/terms-of-service" className="footer-link">Terms of Service</Link>
+                </div>
+            </div>
+        </footer>
+    );
+};
+
+export { Header, Footer };

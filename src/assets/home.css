@@ -1,36 +1,63 @@
+body {
+    background-color: rgb(237, 147, 147); /* Set the background color to black */
+    color: rgb(255, 250, 250); /* Set text color to white */
+}
+
 .container {
-    margin: 0 auto;
     padding: 20px;
-    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    /*background-color: #f0f0f0; /* Change background color to light gray */
+}
+
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: rgb(237, 242, 243);
 }
 
 .blog-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+    width: 100%;
+    max-width: 900px;
 }
 
-.card {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.blog-card {
+    position: relative; /* Ensure positioning context for absolute positioning */
+    width: 100%;
+    margin-bottom: 25px;
 }
 
-.card img {
+.blog-card img {
     width: 100%;
     height: auto;
-    object-fit: cover;
 }
 
-.card-content {
-    padding: 20px;
+.blog-title {
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
-.card-content h2 {
-    margin-top: 0;
+.blog-category {
+    color: #666;
+    margin-bottom: 5px;
 }
 
-.card-content p {
-    margin: 10px 0;
+.blog-content {
+    margin-bottom: 10px;
+}
+
+.blog-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.read-more-button {
+    margin-top: 10px;
+}
+.icon-btn {
+    padding: 0;
+    margin: 0;
 }

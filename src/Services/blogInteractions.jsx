@@ -1,36 +1,76 @@
-// Services/blogInteractions.js
+// Services/blogInteractions.jsx
+
 const likeBlog = async (blogId) => {
     try {
-        const response = await fetch(`/blogs/${blogId}/like`, {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            console.error('Token not found in local storage');
+            return null;
+        }
+
+        const response = await fetch(`http://localhost:3000/api/int/blogs/${blogId}/like`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                // Add authentication token if required
+                'Authorization': `Bearer ${token}`
             },
         });
-        if (!response.ok) {
+
+        if (!response) {
             throw new Error('Failed to like the blog');
         }
-        // Handle successful response
+
+        return response;
     } catch (error) {
         console.error('Error liking blog:', error);
         // Handle error
     }
 };
 
+const checkLikedBlog = async (blogId) => {
+    try {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            console.error('Token not found in local storage');
+            return null;
+        }
+
+        const response = await fetch(`http://localhost:3000/api/int/blogs/${blogId}/like`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+        });
+
+        return response;
+    } catch (error) {
+        console.error('Error checking liked blog:', error);
+        // Handle error
+    }
+};
+
+
+
+
 const shareBlog = async (blogId) => {
     try {
-        const response = await fetch(`/blogs/${blogId}/share`, {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            console.error('Token not found in local storage');
+            return null;
+        }
+        const response = await fetch(`http://localhost:3000/api/int/blogs/${blogId}/share`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                // Add authentication token if required
+                'Authorization': `Bearer ${token}`
             },
         });
         if (!response.ok) {
             throw new Error('Failed to share the blog');
         }
-        // Handle successful response
+        return response;
     } catch (error) {
         console.error('Error sharing blog:', error);
         // Handle error
@@ -39,7 +79,14 @@ const shareBlog = async (blogId) => {
 
 const bookmarkBlog = async (blogId) => {
     try {
-        const response = await fetch(`/blogs/${blogId}/bookmark`, {
+
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            console.error('Token not found in local storage');
+            return null;
+        }
+        const response = await fetch(`http://localhost:3000/api/int/blogs/${blogId}/bookmark`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -49,7 +96,7 @@ const bookmarkBlog = async (blogId) => {
         if (!response.ok) {
             throw new Error('Failed to bookmark the blog');
         }
-        // Handle successful response
+       return response;
     } catch (error) {
         console.error('Error bookmarking blog:', error);
         // Handle error
@@ -58,13 +105,13 @@ const bookmarkBlog = async (blogId) => {
 
 const getLikesForBlog = async (blogId) => {
     try {
-        const response = await fetch(`/blogs/${blogId}/like`);
+        const response = await fetch(`http://localhost:3000/api/int/blogs/${blogId}/all-like`);
         if (!response.ok) {
             throw new Error('Failed to get likes for the blog');
         }
         const data = await response.json();
         // Handle successful response
-        return data.likes; // Assuming the response contains likes count
+        return data.likesCount; // Assuming the response contains likes count
     } catch (error) {
         console.error('Error getting likes for blog:', error);
         // Handle error
@@ -72,4 +119,4 @@ const getLikesForBlog = async (blogId) => {
     }
 };
 
-export { likeBlog, shareBlog, bookmarkBlog, getLikesForBlog };
+export { likeBlog,checkLikedBlog, shareBlog, bookmarkBlog, getLikesForBlog };
