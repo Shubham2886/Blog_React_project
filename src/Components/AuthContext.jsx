@@ -1,42 +1,3 @@
-// // AuthContext.js
-// import React, { createContext, useContext, useState, useEffect } from 'react';
-
-// const AuthContext = createContext();
-
-// export const useAuth = () => {
-//   return useContext(AuthContext);
-// };
-
-// export const AuthProvider = ({ children }) => {
-//   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-//   useEffect(() => {
-//     // Check if user is logged in on component mount
-//     const userLoggedIn = localStorage.getItem('isLoggedIn') === 'true'; // Check local storage
-//     //console.log(userLoggedIn);
-//     setIsLoggedIn(userLoggedIn);
-//   }, []);
-
-
-//   const login = () => {
-//     // Your login logic here
-//     setIsLoggedIn(true);
-//   };
-
-//   const logout = () => {
-//     // Your logout logic here
-//     setIsLoggedIn(false);
-//   };
-
-//   return (
-//     <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// };
-
-
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext();
@@ -53,11 +14,19 @@ export const AuthProvider = ({ children }) => {
 
     return userLoggedIn && tokenExpiration && currentTime < parseInt(tokenExpiration);
   });
+  
+  const [currentUser, setCurrentUser] = useState(() => {
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    return user ? user : null;
+  });
 
   const login = () => {
     // Your login logic here
     setIsLoggedIn(true);
     localStorage.setItem('isLoggedIn', 'true'); // Store login status in localStorage
+    // Set currentUser if needed
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    setCurrentUser(user);
   };
 
   const logout = () => {
@@ -65,6 +34,8 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('tokenExpiration');
     localStorage.setItem('isLoggedIn', 'false'); // Store login status in localStorage
     setIsLoggedIn(false);
+    // Clear currentUser
+    setCurrentUser(null);
   };
 
   useEffect(() => {
@@ -75,8 +46,13 @@ export const AuthProvider = ({ children }) => {
 
       if (userLoggedIn && tokenExpiration && currentTime < parseInt(tokenExpiration)) {
         setIsLoggedIn(true);
+        // Set currentUser if needed
+        const user = JSON.parse(localStorage.getItem('currentUser')); // Assuming currentUser is stored in localStorage
+        setCurrentUser(user);
       } else {
         setIsLoggedIn(false);
+        // Clear currentUser
+        setCurrentUser(null);
       }
     };
 
@@ -90,7 +66,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, login, logout, currentUser }}>
       {children}
     </AuthContext.Provider>
   );

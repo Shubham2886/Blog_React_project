@@ -1,10 +1,10 @@
 /* footer.css */
 
 .footer-container {
-    background-color: #5398ce;
+    background-color: #aaa9ec;
     padding: 20px;
     text-align: center;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     border-top: 1px solid #ccc; /* Add a border on top for separation */
 }
 

@@ -3,11 +3,21 @@ body {
     color: rgb(255, 250, 250); /* Set text color to white */
 }
 
+body::-webkit-scrollbar {
+    display: none;
+}
+
+
 .container {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center content horizontally */
+    align-items: center;
+    background-image: url('../assets/andrew-neel-cckf4TsHAuw-unsplash.jpg'); /* Replace with your actual image path */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed; /* Keep background fixed in place */
     /*background-color: #f0f0f0; /* Change background color to light gray */
 }
 
@@ -61,3 +71,86 @@ body {
     padding: 0;
     margin: 0;
 }
+
+
+
+/* Add these styles to your home.css file */
+
+/* Pagination styles */
+.MuiPagination-ul {
+    justify-content: center;
+}
+
+.MuiPaginationItem-root {
+    font-size: 1.2rem;
+    margin: 0 2px;
+    color: #333;
+}
+
+.MuiPaginationItem-root.Mui-selected {
+    color: #fff;
+    background-color: #007bff;
+}
+
+.MuiPaginationItem-page:hover {
+    background-color: #f0f0f0;
+}
+
+.MuiPaginationItem-ellipsis {
+    color: #333;
+}
+
+.MuiPaginationItem-ellipsis:hover {
+    background-color: transparent;
+}
+
+.MuiPaginationItem-ellipsis.Mui-disabled {
+    color: #666;
+}
+
+.MuiPaginationItem-firstPage,
+.MuiPaginationItem-lastPage {
+    border: 1px solid #007bff;
+}
+
+.MuiPaginationItem-firstPage:hover,
+.MuiPaginationItem-lastPage:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+
+
+/* Add these styles to your home.css file */
+
+.comment {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Adjust margin between comments */
+}
+
+.comment-content {
+    flex: 1;
+    max-width: calc(100% - 100px); /* Limit the width of the comment content */
+    /* Adjust as needed based on the maximum width you want for the comment content */
+}
+
+.comment-actions {
+    display: flex;
+}
+
+.edit-icon,
+.delete-icon {
+    margin-left: 10px; /* Adjust left margin for spacing between icons and comment content */
+}
+
+.edit-icon:hover,
+.delete-icon:hover {
+    background-color: transparent; /* Set background color to transparent on hover */
+}
+
+.edit-icon:focus,
+.delete-icon:focus {
+    outline: none;
+}
+

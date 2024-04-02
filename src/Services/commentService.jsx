@@ -7,24 +7,24 @@ const getAllCommentsForBlog = async (blogId) => {
             throw new Error('Token not found');
         }
         
-        const response = await fetch(`http://localhost:3000/api/blogs/${blogId}/comments`, {
+        const response = await fetch(`http://localhost:3000/api/comment/blogs/${blogId}/comments`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         });
         
-        if (!response.ok) {
-            throw new Error('Failed to get comments for the blog');
-        }
+        // if (!response.ok) {
+        //     throw new Error('Failed to get comments for the blog');
+        // }
         
-        const responseData = await response.json();
+        // const responseData = await response.json();
         
-        // Check if the response status is not "success"
-        if (responseData.status !== 'success' || !responseData.data || responseData.data.length === 0) {
-            throw new Error('No comments found for the blog');
-        }
-        
-        return responseData.data;
+        // // Check if the response status is not "success"
+        // if (responseData.status !== 'success' || !responseData.data || responseData.data.length === 0) {
+        //     throw new Error('No comments found for the blog');
+        // }
+        return response;
+        //return responseData.data;
     } catch (error) {
         console.error('Error getting comments for blog:', error);
         throw error;
@@ -34,7 +34,7 @@ const getAllCommentsForBlog = async (blogId) => {
 const addComment = async (blogId, commentData) => {
     try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`/api/blogs/${blogId}/comments`, {
+        const response = await fetch(`http://localhost:3000/api/comment/blogs/${blogId}/comments`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -45,6 +45,7 @@ const addComment = async (blogId, commentData) => {
         if (!response.ok) {
             throw new Error('Failed to add comment');
         }
+        return response;
     } catch (error) {
         console.error('Error adding comment:', error);
         throw error;
@@ -54,7 +55,7 @@ const addComment = async (blogId, commentData) => {
 const updateComment = async (blogId, commentId, updatedCommentData) => {
     try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`/api/blogs/${blogId}/comments/${commentId}`, {
+        const response = await fetch(`http://localhost:3000/api/comment/blogs/${blogId}/comments/${commentId}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -65,6 +66,7 @@ const updateComment = async (blogId, commentId, updatedCommentData) => {
         if (!response.ok) {
             throw new Error('Failed to update comment');
         }
+        return response;
     } catch (error) {
         console.error('Error updating comment:', error);
         throw error;
@@ -74,7 +76,7 @@ const updateComment = async (blogId, commentId, updatedCommentData) => {
 const deleteComment = async (blogId, commentId) => {
     try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`/api/blogs/${blogId}/comments/${commentId}`, {
+        const response = await fetch(`http://localhost:3000/api/comment/blogs/${blogId}/comments/${commentId}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -83,6 +85,7 @@ const deleteComment = async (blogId, commentId) => {
         if (!response.ok) {
             throw new Error('Failed to delete comment');
         }
+        return response;
     } catch (error) {
         console.error('Error deleting comment:', error);
         throw error;

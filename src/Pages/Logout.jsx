@@ -1,13 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Components/AuthContext';
 import { Snackbar, Alert as MuiAlert } from '@mui/material';
-
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Logout = () => {
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const { logout } = useAuth(); // Use login function from useAuth
+
+  useEffect(() => {
+    // Simulate some asynchronous initialization tasks
+    setTimeout(() => {
+        setLoading(false);
+    }, 1000); // Simulate a 2-second loading time
+  }, []);
 
   useEffect(() => {
     // Clear token and related data from local storage
@@ -15,6 +23,7 @@ const Logout = () => {
     localStorage.removeItem('tokenExpiration');
     localStorage.setItem('isLoggedIn', false);
     logout(); // Call the logout function
+
     // Redirect to the login page
     setTimeout(() => {
       navigate('/login');
@@ -38,7 +47,14 @@ const Logout = () => {
           You have been logged out.
         </MuiAlert>
       </Snackbar>
-      <div>Logging out...</div>
+      {loading ? (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+          <CircularProgress /> {/* Display CircularProgress while logging out */}
+          <p style={{ marginTop: '20px' }}>Please visit again!</p> {/* Display message */}
+        </div>
+      ) : (
+        <div>Logging out...</div>
+      )}
     </div>
   );
 };

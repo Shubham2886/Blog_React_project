@@ -75,18 +75,26 @@ const Header = () => {
     );
 };
 
-const Footer = () => {
+const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+  
+  const Footer = () => {
     return (
-        <footer className="footer-container">
-            <div className="footer-content">
-                <p className="footer-text">&copy; 2024 Daily Blogs. All Rights Reserved.</p>
-                <div className="footer-links">
-                    <Link to="/privacy-policy" className="footer-link">Privacy Policy</Link>
-                    <span className="footer-separator"> | </span>
-                    <Link to="/terms-of-service" className="footer-link">Terms of Service</Link>
-                </div>
-            </div>
-        </footer>
+      <footer className="footer-container">
+        <div className="footer-content">
+          <p className="footer-text">&copy; 2024 Daily Blogs. All Rights Reserved.</p>
+          <div className="footer-links">
+            {/* Adding onClick event to the link */}
+            <Link to="/privacy-policy" className="footer-link" onClick={scrollToTop}>Privacy Policy</Link>
+            <span className="footer-separator"> | </span>
+            <Link to="/terms-of-service" className="footer-link" onClick={scrollToTop}>Terms of Service</Link>
+          </div>
+        </div>
+      </footer>
     );
 };
 

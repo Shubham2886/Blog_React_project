@@ -16,10 +16,10 @@ const likeBlog = async (blogId) => {
             },
         });
 
-        if (!response) {
-            throw new Error('Failed to like the blog');
-        }
-
+        // if (!response) {
+        //     throw new Error('Failed to like the blog');
+        // }
+        
         return response;
     } catch (error) {
         console.error('Error liking blog:', error);
@@ -89,8 +89,7 @@ const bookmarkBlog = async (blogId) => {
         const response = await fetch(`http://localhost:3000/api/int/blogs/${blogId}/bookmark`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                // Add authentication token if required
+                'Authorization': `Bearer ${token}`
             },
         });
         if (!response.ok) {

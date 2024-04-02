@@ -40,20 +40,22 @@ const createBlog = async (blogData) => {
     }
 };
 
-    const updateBlog = async (blogId, updatedBlogData) => {
+const updateBlog = async (blogId, updatedBlogData) => {
+    console.log(updatedBlogData);
+    console.log(JSON.stringify(updatedBlogData));
         try {
-            const response = await fetch(`/updateBlog/${blogId}`, {
+            const token = localStorage.getItem('token');
+            const response = await fetch(`http://localhost:3000/api/blogs/updateBlog/${blogId}`, {
                 method: 'PATCH',
                 headers: {
-                    'Content-Type': 'application/json',
-                    // Add authentication token if required
+                    'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify(updatedBlogData),
+                body: updatedBlogData,
             });
             if (!response.ok) {
                 throw new Error('Failed to update the blog');
             }
-            // Handle successful response
+            return response;
         } catch (error) {
             console.error('Error updating blog:', error);
             // Handle error

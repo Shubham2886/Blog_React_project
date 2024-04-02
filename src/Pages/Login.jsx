@@ -51,9 +51,10 @@ const Login = () => {
             }
 
             const data = await response.json();
+            console.log(data);
             if (data.status === "ok") {
                 // Handle successful OTP verification
-            
+
                 setOpenModal(false); // Close the OTP verification modal
                 // Handle successful login
                 localStorage.setItem('token', data.jwt_token);
@@ -62,12 +63,29 @@ const Login = () => {
                 const expirationTime = new Date().getTime() + expiresIn * 1000;
                 localStorage.setItem('tokenExpiration', expirationTime);
                 localStorage.setItem('isLoggedIn', true);
+
+                // Check if user data exists before accessing its properties
+                const user = data.user; // Assuming user data is nested under 'user' property
+                if (user && user.id) {
+                    localStorage.setItem('currentUser', JSON.stringify(user)); // Store user data
+                    console.log(user); // Log user data
+                } else {
+                    console.error('User data not found or incomplete:', user);
+                    // Handle missing or incomplete user data
+                }
+                console.log(data.user);
                 login();
                 setOpen(true); // Open the Snackbar for successful login
                 setTimeout(() => {
                     setOpen(false); // Close the Snackbar after 3 seconds
                     navigate('/'); // Redirect to '/'
                 }, 3000);
+                // Clear the form
+                setFormData({
+                    username: "",
+                    email: "",
+                    password: ""
+                });
             } else {
                 throw new Error(data.message || 'Failed to verify OTP');
             }
@@ -80,19 +98,22 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            const trimmedEmail = formData.email.trim(); // Trim email input
+            const trimmedPassword = formData.password.trim(); // Trim password input
+
             const response = await fetch('http://localhost:3000/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({ email: trimmedEmail, password: trimmedPassword }), // Send trimmed values for authentication
             });
 
             if (response.ok) {
                 const data = await response.json();
                 if (data.message === "OTP sent to email for login") {
                     // Handle successful login
-                    
+
                     setOpenModal(true); // Open the OTP verification modal
                 } else {
                     throw new Error('Unexpected response from server');
