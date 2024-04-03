@@ -626,11 +626,13 @@ const Home = () => {
     const handleLike = async (blogId) => {
         try {
             const response = await likeBlog(blogId);
-            if (!response.ok) {
+            const responseData = await response.json();
+    
+            if (!response) {
                 setDialogOpen(true);
                 return;
             }
-            const responseData = await response.json();
+    
             if (response.ok) {
                 const updatedBlogs = blogs.map(blog => {
                     if (blog._id === blogId) {
@@ -649,7 +651,7 @@ const Home = () => {
             console.error('Error liking blog:', error);
         }
     };
-
+    
     const checkBlogLikedStatus = async (blogId) => {
         try {
             const response = await checkLikedBlog(blogId);
@@ -879,7 +881,7 @@ const Home = () => {
                                     <Fab aria-label="bookmark" onClick={() => handleBookmark(blog._id)} className="icon-btn" style={{ marginRight: '8px' }}>
                                         <BookmarkIcon />
                                     </Fab>
-                                    {likesCountMap[blog._id] && <Typography variant="body2">{likesCountMap[blog._id]} Likes</Typography>}
+                                    {likesCountMap[blog._id] > 0 && <Typography variant="body2">{likesCountMap[blog._id]} Likes</Typography>}
                                 </div>
                             </div>
                             <Typography

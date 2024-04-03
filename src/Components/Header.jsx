@@ -58,17 +58,17 @@ const Header = () => {
                     open={open}
                     onClose={handleClose}
                 >
-                    {isLoggedIn ? ( // Show "User Profile" link only when logged in
-                        <>
-                            <MenuItem onClick={handleClose}><Link to="/user-profile">User Profile</Link></MenuItem>
-                            <MenuItem onClick={handleClose}><Link to="/logout">Logout</Link></MenuItem>
-                        </>
-                    ) : (
-                        <>
-                            <MenuItem onClick={handleClose}><Link to="/login">Login</Link></MenuItem>
-                            <MenuItem onClick={handleClose}><Link to="/register">Register</Link></MenuItem>
-                        </>
-                    )}
+                {isLoggedIn ? (
+                    [
+                      <MenuItem key="profile" onClick={handleClose}><Link to="/user-profile">User Profile</Link></MenuItem>,
+                      <MenuItem key="logout" onClick={handleClose}><Link to="/logout">Logout</Link></MenuItem>
+                    ]
+                  ) : (
+                    [
+                      <MenuItem key="login" onClick={handleClose}><Link to="/login">Login</Link></MenuItem>,
+                      <MenuItem key="register" onClick={handleClose}><Link to="/register">Register</Link></MenuItem>
+                    ]
+                  )}                  
                 </Menu>
             </Toolbar>
         </AppBar>

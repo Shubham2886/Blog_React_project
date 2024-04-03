@@ -1,6 +1,7 @@
 // Services/blogInteractions.jsx
 
 const likeBlog = async (blogId) => {
+    console.log(blogId)
     try {
         const token = localStorage.getItem('token');
 
@@ -19,7 +20,7 @@ const likeBlog = async (blogId) => {
         // if (!response) {
         //     throw new Error('Failed to like the blog');
         // }
-        
+
         return response;
     } catch (error) {
         console.error('Error liking blog:', error);

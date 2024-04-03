@@ -1,42 +1,48 @@
 /* login.css */
 
-
-
+/* Container styling */
 .login-container {
     max-width: 400px;
-    margin: 50px auto 0 auto; /* Added space from the top */
+    margin: 50px auto 0 auto;
+    margin-bottom: 20px;
     padding: 20px;
     border-radius: 8px;
-    background-color: #e85151; /* Set the background color to a dark shade of black */
+    background-color: #b1ecc3; /* Set background color to white */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Form styling */
 .login-form {
     margin-top: 20px;
 }
 
-.form-group {
+/* Input field styling */
+.input-field {
     margin-bottom: 20px;
 }
 
-label {
+/* Label styling */
+.input-label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    color: #333333; /* Set label color to dark gray */
 }
 
-input[type="text"],
-input[type="email"] {
+/* Text field styling */
+.input-textfield {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #555; /* Set the border color to a light shade of gray */
+    padding: 15px;
     border-radius: 4px;
-    box-sizing: border-box;
-    background-color: #222; /* Set the input background color to a darker shade */
-    color: white; /* Set input text color to white */
+    box-sizing: border-box; /* Use border-box to include padding and border in width */
+    border: 1px solid #cccccc; /* Add a light gray border */
+    background-color: #f9f9f9; /* Set background color to a light gray shade */
+    font-size: 16px; /* Set font size */
+    color: #333333; /* Set text color to dark gray */
 }
 
-button[type="submit"] {
+/* Button styling */
+.submit-button {
     width: 100%;
     padding: 10px;
     background-color: #4caf50;
@@ -47,10 +53,11 @@ button[type="submit"] {
     transition: background-color 0.3s;
 }
 
-button[type="submit"]:hover {
+.submit-button:hover {
     background-color: #45a049;
 }
 
+/* Error message styling */
 .error-message {
     color: #f44336;
     margin-top: 10px;
