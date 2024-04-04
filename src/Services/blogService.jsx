@@ -4,16 +4,9 @@ const createBlog = async (blogData) => {
     try {
         // Retrieve token from local storage
         const token = localStorage.getItem('token');
-
-        // Check if the token is expired
-        const expirationTime = localStorage.getItem('tokenExpiration');
-        if (expirationTime && new Date().getTime() > expirationTime) {
-            // Clear token and handle expiration
-            localStorage.removeItem('token');
-            localStorage.removeItem('tokenExpiration');
-            // Redirect the user to the login page or display a message
-            console.log('Token expired. Redirecting to login...');
-            return; // Exit function to prevent further execution
+        if (!token) {
+            console.error('Token not found in local storage');
+            return null;
         }
 
         // Proceed with creating the blog post
@@ -41,10 +34,12 @@ const createBlog = async (blogData) => {
 };
 
 const updateBlog = async (blogId, updatedBlogData) => {
-    console.log(updatedBlogData);
-    console.log(JSON.stringify(updatedBlogData));
         try {
             const token = localStorage.getItem('token');
+            if (!token) {
+                console.error('Token not found in local storage');
+                return null;
+            }
             const response = await fetch(`http://localhost:3000/api/blogs/updateBlog/${blogId}`, {
                 method: 'PATCH',
                 headers: {

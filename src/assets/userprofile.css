@@ -1,0 +1,16 @@
+/* UserProfile.css */
+
+.user-profile {
+  text-align: left;
+  margin: 20px;
+  padding: 20px; 
+}
+
+.profile-heading {
+  margin-bottom: 20px;
+  color: #54daf2; /* Adjust color according to your design */
+}
+
+.profile-info {
+  margin-bottom: 10px;
+}

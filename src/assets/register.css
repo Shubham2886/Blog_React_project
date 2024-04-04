@@ -4,6 +4,9 @@
     width: 100%;
     max-width: 400px;
     margin: 50px auto; /* Add space between header and form */
+    background-image: url('../assets/marco-tjokro-cvj8Li-amfw-unsplash.jpg');
+    background-size: cover; /* Adjusts the background image to cover the entire container */
+    background-position: center; /* Centers the background image */
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;

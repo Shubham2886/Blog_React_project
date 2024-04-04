@@ -13,6 +13,8 @@ import UserProfile from './UserProfile';
 import PrivacyPolicy from './PrivacyPolicy';
 import TermsOfService from './TermsOfService';
 import CircularProgress from '@mui/material/CircularProgress'; // Import CircularProgress from Material-UI
+import UserBlog from './UserBlogs';
+import UserActivity from './UserActivity';
 
 const App = () => {
     const [loading, setLoading] = useState(true);
@@ -41,6 +43,8 @@ const App = () => {
                         <Route path="/addblog" element={<AddBlog />} />
                         <Route path="/logout" element={<Logout />} />
                         <Route path="/user-profile" element={<UserProfile />} />
+                        <Route path="/user-blogs" element={<UserBlog />} />
+                        <Route path="/user-activity" element={<UserActivity />} />
                         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                         <Route path="/terms-of-service" element={<TermsOfService />} />
                     </Routes>

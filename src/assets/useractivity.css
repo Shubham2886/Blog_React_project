@@ -1,0 +1,25 @@
+.userActivityContainer {
+    margin-top: 16px;
+  }
+  
+  .activityHeading {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  
+  .activityList {
+    width: 100%;
+  }
+  
+  .activityListItem {
+    padding: 16px;
+  }
+  
+  .activityListItemTextPrimary {
+    font-weight: bold;
+  }
+  
+  .activityListItemTextSecondary {
+    color: gray;
+  }
+  

@@ -503,6 +503,7 @@ const Login = () => {
                                 endAdornment: (
                                     <InputAdornment position="end">
                                         <IconButton
+                                        sx={{ mb: 1}}
                                             aria-label="toggle password visibility"
                                             onClick={handleClickShowPassword}
                                             onMouseDown={handleMouseDownPassword}

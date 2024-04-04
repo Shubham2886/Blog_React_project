@@ -4,7 +4,7 @@
 // import ShareIcon from '@mui/icons-material/Share';
 // import BookmarkIcon from '@mui/icons-material/Bookmark';
 // import { likeBlog, checkLikedBlog, shareBlog, getLikesForBlog, bookmarkBlog } from '../Services/blogInteractions';
-// import { addComment, getAllCommentsForBlog as fetchAllCommentsForBlog, deleteComment } from '../Services/commentService';
+// import { addComment, getAllCommentsForBlog as fetchAllCommentsForBlog, deleteComment, updateComment } from '../Services/commentService';
 // import { Link } from 'react-router-dom';
 // import '../assets/home.css';
 // import Pagination from '@mui/material/Pagination';
@@ -33,6 +33,10 @@
 //     const [currentBlogId, setCurrentBlogId] = useState(null); // State to hold the ID of the currently expanded blog
 //     const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false); // State to manage delete confirmation dialog
 //     const [commentToDelete, setCommentToDelete] = useState(null); // State to hold the ID of the comment to delete
+//     const [editCommentModalOpen, setEditCommentModalOpen] = useState(false);
+//     const [editedCommentContent, setEditedCommentContent] = useState('');
+//     const [commentToEdit, setCommentToEdit] = useState(null);
+
 //     const fetchCommentsForBlog = async (blogId) => {
 //         try {
 //             const response = await fetchAllCommentsForBlog(blogId);
@@ -107,11 +111,14 @@
 //     const handleLike = async (blogId) => {
 //         try {
 //             const response = await likeBlog(blogId);
+
+
 //             if (!response) {
 //                 setDialogOpen(true);
 //                 return;
 //             }
 //             const responseData = await response.json();
+
 //             if (response.ok) {
 //                 const updatedBlogs = blogs.map(blog => {
 //                     if (blog._id === blogId) {
@@ -200,20 +207,9 @@
 //         updateLikedStatusMap();
 //     }, [blogs]);
 
-//     const scrollToTop = () => {
-//         const scrollStep = -window.scrollY / (500 / 15); // Adjust the speed by changing the division factor (500)
-//         const scrollInterval = setInterval(() => {
-//             if (window.scrollY !== 0) {
-//                 window.scrollBy(0, scrollStep);
-//             } else {
-//                 clearInterval(scrollInterval);
-//             }
-//         }, 15); // Adjust the interval to control smoothness
-//     };
-
 //     const handlePageChange = (event, page) => {
 //         setCurrentPage(page);
-//         scrollToTop(); // Call the custom smooth scrolling function
+//         window.scrollTo({ top: 0, behavior: 'smooth' });
 //     };
 
 
@@ -304,6 +300,43 @@
 //         }
 //     };
 
+
+//     // Function to handle opening the edit comment modal
+//     const handleEditComment = (blogId, commentId) => {
+//         const comment = comments.data.find(c => c._id === commentId);
+//         setCommentToEdit(comment);
+//         setEditedCommentContent(''); // Set to empty string initially
+//         setEditCommentModalOpen(true);
+//     };
+
+//     // Function to handle closing the edit comment modal
+//     const handleCloseEditCommentModal = () => {
+//         setEditCommentModalOpen(false);
+//         setCommentToEdit(null);
+//         setEditedCommentContent('');
+//     };
+
+//     // Function to handle editing and submitting the comment
+//     const handleEditSubmit = async () => {
+//         try {
+//             const { blogId, _id } = commentToEdit;
+//             const updatedCommentData = { content: editedCommentContent }; // Use editedCommentContent
+
+//             const response = await updateComment(blogId, _id, updatedCommentData);
+//             if (!response.ok) {
+//                 throw new Error('Failed to update comment');
+//             }
+//             const responseData = await response.json();
+//             console.log(responseData);
+//             setSnackbarMessage(responseData.message);
+//             await fetchCommentsForBlog(blogId);
+//             setSnackbarOpen(true);
+//             handleCloseEditCommentModal();
+//         } catch (error) {
+//             console.error('Error updating comment:', error);
+//         }
+//     };
+
 //     return (
 //         <div className="container" style={{ width: '100%', maxWidth: '100vw', padding: '0', margin: '0' }}>
 //             <div className="header">
@@ -334,7 +367,7 @@
 //                                     <Fab aria-label="bookmark" onClick={() => handleBookmark(blog._id)} className="icon-btn" style={{ marginRight: '8px' }}>
 //                                         <BookmarkIcon />
 //                                     </Fab>
-//                                     {likesCountMap[blog._id] && <Typography variant="body2">{likesCountMap[blog._id]} Likes</Typography>}
+//                                     {likesCountMap[blog._id] > 0 && <Typography variant="body2">{likesCountMap[blog._id]} Likes</Typography>}
 //                                 </div>
 //                             </div>
 //                             <Typography
@@ -507,6 +540,32 @@
 //                     </Button>
 //                 </DialogActions>
 //             </Dialog>
+//             <Dialog open={editCommentModalOpen} onClose={handleCloseEditCommentModal} fullWidth maxWidth="sm">
+//                 <DialogTitle>Edit Comment</DialogTitle>
+//                 <DialogContent>
+//                     <TextField
+//                         autoFocus
+//                         multiline
+//                         margin="dense"
+//                         id="edited-comment"
+//                         label="Edit Comment"
+//                         type="text"
+//                         fullWidth
+//                         value={editedCommentContent} // Use editedCommentContent here
+//                         onChange={(e) => setEditedCommentContent(e.target.value)}
+//                         color="primary" // Set the color property to primary
+//                     />
+//                 </DialogContent>
+//                 <DialogActions>
+//                     <Button onClick={handleCloseEditCommentModal} color="primary">
+//                         Cancel
+//                     </Button>
+//                     <Button onClick={handleEditSubmit} color="primary">
+//                         Submit
+//                     </Button>
+//                 </DialogActions>
+//             </Dialog>
+
 //         </div>
 //     );
 // };
@@ -529,7 +588,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const Home = () => {
-    const navigate = useNavigate();
     const { isLoggedIn, currentUser } = useAuth();
     const [blogs, setBlogs] = useState([]);
     const [expandedBlogId, setExpandedBlogId] = useState(null);
@@ -626,13 +684,13 @@ const Home = () => {
     const handleLike = async (blogId) => {
         try {
             const response = await likeBlog(blogId);
-            const responseData = await response.json();
-    
-            if (!response) {
+            if (!response.ok) {
                 setDialogOpen(true);
                 return;
             }
-    
+
+            const responseData = await response.json();
+
             if (response.ok) {
                 const updatedBlogs = blogs.map(blog => {
                     if (blog._id === blogId) {
@@ -651,7 +709,7 @@ const Home = () => {
             console.error('Error liking blog:', error);
         }
     };
-    
+
     const checkBlogLikedStatus = async (blogId) => {
         try {
             const response = await checkLikedBlog(blogId);
@@ -982,35 +1040,36 @@ const Home = () => {
                 <DialogTitle>Comments</DialogTitle>
                 <DialogContent>
                     {/* Display comments */}
-                    {Array.isArray(comments.data) && comments.data.length > 0 ? (
-                        comments.data.map(comment => (
-                            <Paper key={comment._id} style={{ padding: '10px', marginBottom: '10px' }}>
-                                <Grid container wrap="nowrap" spacing={2}>
-                                    <Grid item>
-                                        <Avatar alt={comment.userId.username} src={comment.userId.profilePicture} />
-                                    </Grid>
-                                    <Grid item xs>
-                                        <Typography variant="subtitle1">{comment.userId.username}</Typography>
-                                        <Typography variant="body2" color="textSecondary">{new Date(comment.createdAt).toLocaleString()}</Typography>
-                                        <Typography variant="body1">{comment.content}</Typography>
-                                    </Grid>
-                                    {comment.userId._id === currentUser.id && (
+                    <div style={{ overflowY: 'auto', flex: 1 }}>
+                        {Array.isArray(comments.data) && comments.data.length > 0 ? (
+                            comments.data.map(comment => (
+                                <Paper key={comment._id} style={{ padding: '10px', marginBottom: '10px' }}>
+                                    <Grid container wrap="nowrap" spacing={2}>
                                         <Grid item>
-                                            <IconButton onClick={() => handleEditComment(comment.blogId, comment._id)} className="edit-icon">
-                                                <EditIcon />
-                                            </IconButton>
-                                            <IconButton onClick={() => handleDeleteComment(comment.blogId, comment._id)} className="delete-icon">
-                                                <DeleteIcon />
-                                            </IconButton>
+                                            <Avatar alt={comment.userId.username} src={comment.userId.profilePicture} />
                                         </Grid>
-                                    )}
-                                </Grid>
-                            </Paper>
-                        ))
-                    ) : (
-                        <Typography variant="body1">No comments found for this blog.</Typography>
-                    )}
-
+                                        <Grid item xs>
+                                            <Typography variant="subtitle1">{comment.userId.username}</Typography>
+                                            <Typography variant="body2" color="textSecondary">{new Date(comment.createdAt).toLocaleString()}</Typography>
+                                            <Typography variant="body1">{comment.content}</Typography>
+                                        </Grid>
+                                        {comment.userId._id === currentUser.id && (
+                                            <Grid item>
+                                                <IconButton onClick={() => handleEditComment(comment.blogId, comment._id)} className="edit-icon">
+                                                    <EditIcon />
+                                                </IconButton>
+                                                <IconButton onClick={() => handleDeleteComment(comment.blogId, comment._id)} className="delete-icon">
+                                                    <DeleteIcon />
+                                                </IconButton>
+                                            </Grid>
+                                        )}
+                                    </Grid>
+                                </Paper>
+                            ))
+                        ) : (
+                            <Typography variant="body1">No comments found for this blog.</Typography>
+                        )}
+                    </div>
                     {/* Add comment section */}
                     <TextField
                         id={`comment-input-${currentBlogId}`}

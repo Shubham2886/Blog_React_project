@@ -121,9 +121,8 @@ const getUserActivity = async () => {
         if (!response.ok) {
             throw new Error('Failed to get user activity');
         }
-        const data = await response.json();
         // Handle successful response
-        return data.userActivity; // Assuming the response contains user activity data
+        return response; // Assuming the response contains user activity data
     } catch (error) {
         console.error('Error getting user activity:', error);
         // Handle error

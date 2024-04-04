@@ -63,3 +63,9 @@
     margin-top: 10px;
     font-size: 14px;
 }
+
+
+.MuiBox-root input{
+    border: none !important;
+    border-radius: none !important;
+}
