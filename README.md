@@ -24,12 +24,12 @@ This is a blog website built using React, Material-UI, and Context API for state
 ## Installation
 1. Clone the repository:
     ```bash
-   git clone https://github.com/your-username/.git
+   https://github.com/Shubham2886/Blog_React_project.git
     ```
 
 2. Install dependencies:
     ```bash
-    cd blog-project
+    cd Blog_React_project
     npm install
     ```
 
@@ -43,7 +43,6 @@ This is a blog website built using React, Material-UI, and Context API for state
 - Register an account or log in if you already have an account.
 - Create, view, update, or delete your blogs.
 - Comment on blogs, like, share, or bookmark them.
-- Explore other users' profiles and their activity history.
 
 ## Contributing
 Contributions are welcome! If you find any bugs or want to suggest new features, please open an issue or submit a pull request.
