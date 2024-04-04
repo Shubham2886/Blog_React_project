@@ -1,7 +1,7 @@
 # Blog Project
 
 ## Introduction
-This is a blog website built using React, Material-UI, and Context API for state management.
+This is a blog website built using React + vite, Material-UI, and Context API for state management.
 
 ## Table of Contents
 1. [Introduction](#introduction)
