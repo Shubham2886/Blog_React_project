@@ -1,7 +1,6 @@
 // Services/blogInteractions.jsx
 
 const likeBlog = async (blogId) => {
-    console.log(blogId)
     try {
         const token = localStorage.getItem('token');
 

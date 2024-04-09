@@ -2,11 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Button, Menu, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import logo from '../assets/logo-no-background.png'; // Import the logo image
-import { useAuth } from './AuthContext'; // Import the useAuth hook
-import '../assets/footer.css'
+import logo from '../assets/logo-no-background.png'; 
+import { useAuth } from './AuthContext'; 
+import '../assets/footer.css';
+
 const Header = () => {
-    const { isLoggedIn } = useAuth(); // Use the useAuth hook to get authentication state
+    const { isLoggedIn } = useAuth(); 
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -20,7 +21,7 @@ const Header = () => {
     };
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" sx={{ backgroundColor: '#21c0f3' }}>
             <Toolbar>
                 <div className="logo">
                     <Link to="/">
@@ -37,8 +38,8 @@ const Header = () => {
                         aria-haspopup="true"
                         onClick={handleMenu}
                         color="inherit"
-                        size="small" // Reduce the size of the IconButton
-                        sx={{ padding: '4px' }} // Reduce padding to take up less space
+                        size="small" 
+                        sx={{ padding: '4px' }} 
                     >
                         <MenuIcon />
                     </Button>
@@ -83,7 +84,7 @@ const scrollToTop = () => {
       behavior: "smooth"
     });
   };
-  
+
   const Footer = () => {
     return (
       <footer className="footer-container">
@@ -101,3 +102,5 @@ const scrollToTop = () => {
 };
 
 export { Header, Footer };
+
+

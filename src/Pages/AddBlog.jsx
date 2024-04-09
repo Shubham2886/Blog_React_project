@@ -141,18 +141,18 @@ const AddBlog = () => {
                             />
                         </Grid>
                         <Grid item xs={12} sx={{ mt: 2 }}>
-                            <Typography variant="subtitle1" sx={{ fontWeight: 'bold', fontSize: 16 }}>Content</Typography>
-                            <TextField
-                                fullWidth
-                                multiline
-                                rows={6}
-                                id="blogcontent"
-                                name="blogcontent"
-                                value={blogData.blogcontent}
-                                onChange={handleChange}
-                                InputLabelProps={{ shrink: true }} // Adjusting InputLabelProps
-                            />
-                        </Grid>
+                        <Typography variant="subtitle1" sx={{ fontWeight: 'bold', fontSize: 16 }}>Content</Typography>
+                        <TextField
+                            fullWidth
+                            multiline
+                            rows={6}
+                            id="blogcontent"
+                            name="blogcontent"
+                            value={blogData.blogcontent}
+                            onChange={handleChange}
+                            InputLabelProps={{ shrink: true }} // Adjusting InputLabelProps
+                        />
+                    </Grid>                    
                         <Grid item xs={12} sx={{ mt: 2 }}>
                         <Typography variant="subtitle1" sx={{ fontWeight: 'bold', fontSize: 16 }}>Category</Typography>
                         <Select
@@ -168,6 +168,8 @@ const AddBlog = () => {
                             Select category
                         </MenuItem>
                         <MenuItem value="Travel">Travel</MenuItem>
+                        <MenuItem value="Spirituality">Spirituality</MenuItem>
+                        <MenuItem value="Mythology">Mythology</MenuItem>
                         <MenuItem value="Food">Food and Cooking</MenuItem>
                         <MenuItem value="Lifestyle">Lifestyle</MenuItem>
                         <MenuItem value="Technology">Technology</MenuItem>
