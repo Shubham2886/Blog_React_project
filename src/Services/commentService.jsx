@@ -7,7 +7,7 @@ const getAllCommentsForBlog = async (blogId) => {
             throw new Error('Token not found');
         }
         
-        const response = await fetch(`http://localhost:3000/api/comment/blogs/${blogId}/comments`, {
+        const response = await fetch(`https://blog-node-project.vercel.app/api/comment/blogs/${blogId}/comments`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -34,7 +34,7 @@ const getAllCommentsForBlog = async (blogId) => {
 const addComment = async (blogId, commentData) => {
     try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`http://localhost:3000/api/comment/blogs/${blogId}/comments`, {
+        const response = await fetch(`https://blog-node-project.vercel.app/api/comment/blogs/${blogId}/comments`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ const addComment = async (blogId, commentData) => {
 const updateComment = async (blogId, commentId, updatedCommentData) => {
     try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`http://localhost:3000/api/comment/blogs/${blogId}/comments/${commentId}`, {
+        const response = await fetch(`https://blog-node-project.vercel.app/api/comment/blogs/${blogId}/comments/${commentId}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ const updateComment = async (blogId, commentId, updatedCommentData) => {
 const deleteComment = async (blogId, commentId) => {
     try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`http://localhost:3000/api/comment/blogs/${blogId}/comments/${commentId}`, {
+        const response = await fetch(`https://blog-node-project.vercel.app/api/comment/blogs/${blogId}/comments/${commentId}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`,

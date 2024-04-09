@@ -86,7 +86,7 @@
 
 //     const fetchBlogs = async (page) => {
 //         try {
-//             const response = await fetch(`http://localhost:3000/api/blogs/getAllBlogs?page=${page}&limit=5`);
+//             const response = await fetch(`https://blog-node-project.vercel.app/api/blogs/getAllBlogs?page=${page}&limit=5`);
 //             if (!response.ok) {
 //                 throw new Error('Failed to fetch blogs');
 //             }
@@ -345,7 +345,7 @@
 //                     <Card key={blog._id} className="blog-card">
 //                         <CardMedia
 //                             component="img"
-//                             src={`http://localhost:3000/${blog.blogimage.replace(/\\/g, '/')}`}
+//                             src={`https://blog-node-project.vercel.app/${blog.blogimage.replace(/\\/g, '/')}`}
 //                             alt={blog.blogtitle}
 //                         />
 //                         <CardContent>
@@ -659,7 +659,7 @@
 
 //     const fetchBlogs = async (page) => {
 //         try {
-//             const response = await fetch(`http://localhost:3000/api/blogs/getAllBlogs?page=${page}&limit=5`);
+//             const response = await fetch(`https://blog-node-project.vercel.app/api/blogs/getAllBlogs?page=${page}&limit=5`);
 //             if (!response.ok) {
 //                 throw new Error('Failed to fetch blogs');
 //             }
@@ -920,7 +920,7 @@
 //                     <Grid container style={{ position: 'relative' }}>
 //                     <CardMedia
 //                         component="img"
-//                         src={`http://localhost:3000/${blog.blogimage.replace(/\\/g, '/')}`}
+//                         src={`https://blog-node-project.vercel.app/${blog.blogimage.replace(/\\/g, '/')}`}
 //                         alt={blog.blogtitle}
 //                     />
 //                     <div style={{ position: 'absolute', color: 'white', marginLeft: '8px', marginTop: '8px', top: 0, left: 0, padding: '8px', display: 'flex', flexDirection: 'column', backgroundColor: 'rgba(255, 255, 255, 0)', borderRadius: '8px' }}>
@@ -933,7 +933,7 @@
 //                 </Grid>
 //                         <CardMedia
 //                             component="img"
-//                             src={`http://localhost:3000/${blog.blogimage.replace(/\\/g, '/')}`}
+//                             src={`https://blog-node-project.vercel.app/${blog.blogimage.replace(/\\/g, '/')}`}
 //                             alt={blog.blogtitle}
 //                         />
 //                         <CardContent>
@@ -1250,7 +1250,7 @@ const Home = () => {
 
     const fetchBlogs = async (page) => {
         try {
-            const response = await fetch(`http://localhost:3000/api/blogs/getAllBlogs?page=${page}&limit=5`);
+            const response = await fetch(`https://blog-node-project.vercel.app/api/blogs/getAllBlogs?page=${page}&limit=5`);
             if (!response.ok) {
                 throw new Error('Failed to fetch blogs');
             }

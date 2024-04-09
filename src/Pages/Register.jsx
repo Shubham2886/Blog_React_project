@@ -29,7 +29,7 @@
 
 //     const handleOTPVerification = async () => {
 //         try {
-//             const response = await fetch('http://localhost:3000/api/auth/verify-register-otp', {
+//             const response = await fetch('https://blog-node-project.vercel.app/api/auth/verify-register-otp', {
 //                 method: 'POST',
 //                 headers: {
 //                     'Content-Type': 'application/json',
@@ -97,7 +97,7 @@
 //             return;
 //         }
 //         try {
-//             const response = await fetch('http://localhost:3000/api/auth/register', {
+//             const response = await fetch('https://blog-node-project.vercel.app/api/auth/register', {
 //                 method: 'POST',
 //                 headers: {
 //                     'Content-Type': 'application/json',
@@ -232,7 +232,7 @@
 //     const handleOTPVerification = async () => {
 //         try {
 //             const trimmedotp = otp.trim();
-//             const response = await fetch('http://localhost:3000/api/auth/verify-register-otp', {
+//             const response = await fetch('https://blog-node-project.vercel.app/api/auth/verify-register-otp', {
 //                 method: 'POST',
 //                 headers: {
 //                     'Content-Type': 'application/json',
@@ -300,7 +300,7 @@
 //             return;
 //         }
 //         try {
-//             const response = await fetch('http://localhost:3000/api/auth/register', {
+//             const response = await fetch('https://blog-node-project.vercel.app/api/auth/register', {
 //                 method: 'POST',
 //                 headers: {
 //                     'Content-Type': 'application/json',
@@ -480,7 +480,7 @@ const Register = () => {
     const handleOTPVerification = async () => {
         try {
             const trimmedotp = otp.trim();
-            const response = await fetch('http://localhost:3000/api/auth/verify-register-otp', {
+            const response = await fetch('https://blog-node-project.vercel.app/api/auth/verify-register-otp', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -552,7 +552,7 @@ const Register = () => {
         }
 
         try {
-            const response = await fetch('http://localhost:3000/api/auth/register', {
+            const response = await fetch('https://blog-node-project.vercel.app/api/auth/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -594,7 +594,7 @@ const Register = () => {
 
     const handleResendOTP = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/auth/resend-register-otp', {
+            const response = await fetch('https://blog-node-project.vercel.app/api/auth/resend-register-otp', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -665,7 +665,8 @@ const Register = () => {
                         p: 4,
                     }}
                 >
-                    <h2 style={{ marginBottom: '8px', color: 'black' }}>Please check your email for the OTP. {timer} seconds remaining.</h2>
+                    <h2 style={{ marginBottom: '8px', color: 'black' }}>Please check your email for the OTP.</h2>
+                    <h6>Resend otp in {timer}</h6>
                     <TextField
                         sx={{ mb: 2 }}
                         label="OTP"

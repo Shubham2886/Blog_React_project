@@ -39,7 +39,7 @@ This is a blog website built using React + vite, Material-UI, and Context API fo
     ```
 
 ## Usage
-- Visit [http://localhost:5173](http://localhost:3000) in your web browser to access the blog website.
+- Visit [http://localhost:5173](https://blog-node-project.vercel.app) in your web browser to access the blog website.
 - Register an account or log in if you already have an account.
 - Create, view, update, or delete your blogs.
 - Comment on blogs, like, share, or bookmark them.

@@ -35,7 +35,7 @@
 
 // //     const handleOTPVerification = async () => {
 // //         try {
-// //             const response = await fetch('http://localhost:3000/api/auth/verify-login-otp', {
+// //             const response = await fetch('https://blog-node-project.vercel.app/api/auth/verify-login-otp', {
 // //                 method: 'POST',
 // //                 headers: {
 // //                     'Content-Type': 'application/json',
@@ -101,7 +101,7 @@
 // //             const trimmedEmail = formData.email.trim(); // Trim email input
 // //             const trimmedPassword = formData.password.trim(); // Trim password input
 
-// //             const response = await fetch('http://localhost:3000/api/auth/login', {
+// //             const response = await fetch('https://blog-node-project.vercel.app/api/auth/login', {
 // //                 method: 'POST',
 // //                 headers: {
 // //                     'Content-Type': 'application/json',
@@ -305,7 +305,7 @@
 //     const handleOTPVerification = async () => {
 //         try {
 //             const trimmedotp = otp.trim();
-//             const response = await fetch('http://localhost:3000/api/auth/verify-login-otp', {
+//             const response = await fetch('https://blog-node-project.vercel.app/api/auth/verify-login-otp', {
 //                 method: 'POST',
 //                 headers: {
 //                     'Content-Type': 'application/json',
@@ -372,7 +372,7 @@
 //             const trimmedEmail = formData.email.trim(); // Trim email input
 //             const trimmedPassword = formData.password.trim(); // Trim password input
 
-//             const response = await fetch('http://localhost:3000/api/auth/login', {
+//             const response = await fetch('https://blog-node-project.vercel.app/api/auth/login', {
 //                 method: 'POST',
 //                 headers: {
 //                     'Content-Type': 'application/json',
@@ -617,7 +617,7 @@ const Login = () => {
     const handleOTPVerification = async () => {
         try {
             const trimmedotp = otp.trim();
-            const response = await fetch('http://localhost:3000/api/auth/verify-login-otp', {
+            const response = await fetch('https://blog-node-project.vercel.app/api/auth/verify-login-otp', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -686,7 +686,7 @@ const Login = () => {
             const trimmedEmail = formData.email.trim(); // Trim email input
             const trimmedPassword = formData.password.trim(); // Trim password input
 
-            const response = await fetch('http://localhost:3000/api/auth/login', {
+            const response = await fetch('https://blog-node-project.vercel.app/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -739,7 +739,7 @@ const Login = () => {
 
     const handleResendOTP = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/auth/resend-login-otp', {
+            const response = await fetch('https://blog-node-project.vercel.app/api/auth/resend-login-otp', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -788,7 +788,8 @@ const Login = () => {
                     }}
                 >
                     <h2 style={{ marginBottom: '16px' }}>Verify Login OTP</h2>
-                    <p style={{ marginBottom: '8px' }}>Please check your email for the OTP. {timer} seconds remaining.</p>
+                    <p style={{ marginBottom: '8px' }}>Please check your email for the OTP.</p>
+                    <h6>Resend otp in {timer}</h6>
                     <TextField
                         sx={{ mb: 2 }}
                         label="OTP"
@@ -798,6 +799,7 @@ const Login = () => {
                         onChange={(e) => setOtp(e.target.value)}
                         fullWidth
                     />
+                    
                     <Button variant="contained" onClick={handleOTPVerification}>Verify OTP</Button>
                     <Button variant="outlined" sx={{ mt: 2 }} onClick={() => setOpenModal(false)}>Close</Button> {/* Close button */}
                     {showResendButton && (

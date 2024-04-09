@@ -10,7 +10,7 @@ const createBlog = async (blogData) => {
         }
 
         // Proceed with creating the blog post
-        const response = await fetch(`http://localhost:3000/api/blogs/createBlog`, {
+        const response = await fetch(`https://blog-node-project.vercel.app/api/blogs/createBlog`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -40,7 +40,7 @@ const updateBlog = async (blogId, updatedBlogData) => {
             console.error('Token not found in local storage');
             return null;
         }
-        const response = await fetch(`http://localhost:3000/api/blogs/updateBlog/${blogId}`, {
+        const response = await fetch(`https://blog-node-project.vercel.app/api/blogs/updateBlog/${blogId}`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -70,7 +70,7 @@ const updateImage = async (blogId, imageFile) => {
         const formData = new FormData();
         formData.append('blogimage', imageFile);
 
-        const response = await fetch(`http://localhost:3000/api/blogs/updateImage/${blogId}`, {
+        const response = await fetch(`https://blog-node-project.vercel.app/api/blogs/updateImage/${blogId}`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -98,7 +98,7 @@ const deleteBlog = async (blogId) => {
             return null;
         }
 
-        const response = await fetch(`http://localhost:3000/api/blogs/deleteBlog/${blogId}`, {
+        const response = await fetch(`https://blog-node-project.vercel.app/api/blogs/deleteBlog/${blogId}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`

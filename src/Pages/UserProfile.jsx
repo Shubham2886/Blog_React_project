@@ -225,7 +225,7 @@
 //                                     <Typography variant="body2" style={{ backgroundColor: '#f0f0f0', padding: '5px', borderRadius: '3px', marginBottom: '10px', display: 'inline-block' }}>
 //                                         {blog.blogcategory}
 //                                     </Typography>
-//                                     <img src={`http://localhost:3000/${blog.blogimage.replace(/\\/g, '/')}`} alt={blog.blogtitle} style={{ width: '100%', height: 'auto' }} />
+//                                     <img src={`https://blog-node-project.vercel.app/${blog.blogimage.replace(/\\/g, '/')}`} alt={blog.blogtitle} style={{ width: '100%', height: 'auto' }} />
 //                                     <Typography variant="body1" style={{ fontFamily: 'inherit', fontSize: 'inherit', lineHeight: 'inherit', maxHeight: expandedBlogId === blog._id ? 'none' : '100px', overflow: 'hidden' }}>
 //                                         {blog.blogcontent}
 //                                     </Typography>
@@ -598,7 +598,7 @@
 //                                         Category: {blog.blogcategory}
 //                                     </Typography>
 //                                     <hr></hr>
-//                                     <img src={`http://localhost:3000/${blog.blogimage.replace(/\\/g, '/')}`} alt={blog.blogtitle} style={{ width: '100%', height: 'auto' }} />
+//                                     <img src={`https://blog-node-project.vercel.app/${blog.blogimage.replace(/\\/g, '/')}`} alt={blog.blogtitle} style={{ width: '100%', height: 'auto' }} />
 //                                     <Typography variant="body1" style={{ fontFamily: 'inherit', fontSize: 'inherit', lineHeight: 'inherit', maxHeight: expandedBlogId === blog._id ? 'none' : '100px', overflow: 'hidden' }}>
 //                                         {blog.blogcontent}
 //                                     </Typography>

@@ -8,7 +8,7 @@ const getUserProfile = async () => {
             return null;
         }
 
-        const response = await fetch(`http://localhost:3000/api/userprofile/profile`, {
+        const response = await fetch(`https://blog-node-project.vercel.app/api/userprofile/profile`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
@@ -36,7 +36,7 @@ const updateUserProfile = async (updatedProfileData) => {
             return;
         }
 
-        const response = await fetch(`http://localhost:3000/api/userprofile/profile`, {
+        const response = await fetch(`https://blog-node-project.vercel.app/api/userprofile/profile`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -62,7 +62,7 @@ const deleteUserProfile = async () => {
             return;
         }
 
-        const response = await fetch(`http://localhost:3000/api/userprofile/profile`, {
+        const response = await fetch(`https://blog-node-project.vercel.app/api/userprofile/profile`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -86,7 +86,7 @@ const getUserBlogs = async () => {
             return [];
         }
 
-        const response = await fetch(`http://localhost:3000/api/userprofile/profile/blogs`, {
+        const response = await fetch(`https://blog-node-project.vercel.app/api/userprofile/profile/blogs`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -113,7 +113,7 @@ const getUserActivity = async () => {
             return [];
         }
 
-        const response = await fetch(`http://localhost:3000/api/userprofile/profile/activity`, {
+        const response = await fetch(`https://blog-node-project.vercel.app/api/userprofile/profile/activity`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

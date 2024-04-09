@@ -9,7 +9,7 @@ const likeBlog = async (blogId) => {
             return null;
         }
 
-        const response = await fetch(`http://localhost:3000/api/int/blogs/${blogId}/like`, {
+        const response = await fetch(`https://blog-node-project.vercel.app/api/int/blogs/${blogId}/like`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -36,7 +36,7 @@ const checkLikedBlog = async (blogId) => {
             return null;
         }
 
-        const response = await fetch(`http://localhost:3000/api/int/blogs/${blogId}/like`, {
+        const response = await fetch(`https://blog-node-project.vercel.app/api/int/blogs/${blogId}/like`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -61,7 +61,7 @@ const shareBlog = async (blogId) => {
             console.error('Token not found in local storage');
             return null;
         }
-        const response = await fetch(`http://localhost:3000/api/int/blogs/${blogId}/share`, {
+        const response = await fetch(`https://blog-node-project.vercel.app/api/int/blogs/${blogId}/share`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -86,7 +86,7 @@ const bookmarkBlog = async (blogId) => {
             console.error('Token not found in local storage');
             return null;
         }
-        const response = await fetch(`http://localhost:3000/api/int/blogs/${blogId}/bookmark`, {
+        const response = await fetch(`https://blog-node-project.vercel.app/api/int/blogs/${blogId}/bookmark`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -104,7 +104,7 @@ const bookmarkBlog = async (blogId) => {
 
 const getLikesForBlog = async (blogId) => {
     try {
-        const response = await fetch(`http://localhost:3000/api/int/blogs/${blogId}/all-like`);
+        const response = await fetch(`https://blog-node-project.vercel.app/api/int/blogs/${blogId}/all-like`);
         if (!response.ok) {
             throw new Error('Failed to get likes for the blog');
         }
