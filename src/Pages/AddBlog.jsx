@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createBlog } from '../Services/blogService';
-import { Snackbar, Alert as MuiAlert } from '@mui/material';
+import { Snackbar, Alert as MuiAlert, CircularProgress } from '@mui/material';
 import { TextField, Button, Typography, Grid, Container, Paper, Select, MenuItem } from '@mui/material'; // Import Material UI components
 import { useAuth } from '../Components/AuthContext';
 
@@ -17,6 +17,7 @@ const AddBlog = () => {
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
     const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if (!isLoggedIn) {
@@ -41,6 +42,7 @@ const AddBlog = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true); // Start loading
         try {
             const token = localStorage.getItem('token');
             if (!token) {
@@ -112,6 +114,8 @@ const AddBlog = () => {
             setOpenSnackbar(true);
             setSnackbarSeverity('error');
             setSnackbarMessage('Failed to create blog. Please try again later.');
+        } finally {
+            setLoading(false); // Stop loading
         }
     };
 
@@ -212,16 +216,15 @@ const AddBlog = () => {
                             )}
                         </Grid>
                         <Grid item xs={12} sx={{ mt: 2 }}>
-                            <Button type="submit" variant="contained" color="primary">
-                                Submit
+                            <Button type="submit" variant="contained" color="primary" disabled={loading}>
+                                {loading ? <CircularProgress size={24} /> : 'Submit'}
                             </Button>
                         </Grid>
                     </Grid>
                 </form>
             </Paper>
-
             <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleSnackbarClose}
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }} // Adjust anchor origin for mobile devices
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
             >
                 <MuiAlert elevation={6} variant="filled" onClose={handleSnackbarClose} severity={snackbarSeverity}>
                     {snackbarMessage}
