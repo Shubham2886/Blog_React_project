@@ -1,6 +1,7 @@
 /* footer.css */
 
 .footer-container {
+    margin-top: auto;
     background-color: #aaa9ec;
     padding: 20px;
     text-align: center;

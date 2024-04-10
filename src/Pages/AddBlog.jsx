@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createBlog } from '../Services/blogService';
 import { Snackbar, Alert as MuiAlert } from '@mui/material';
-import { TextField, Button, Typography, Grid, Container, Paper,Select, MenuItem } from '@mui/material'; // Import Material UI components
+import { TextField, Button, Typography, Grid, Container, Paper, Select, MenuItem } from '@mui/material'; // Import Material UI components
 import { useAuth } from '../Components/AuthContext';
 
 const AddBlog = () => {
@@ -141,56 +141,56 @@ const AddBlog = () => {
                             />
                         </Grid>
                         <Grid item xs={12} sx={{ mt: 2 }}>
-                        <Typography variant="subtitle1" sx={{ fontWeight: 'bold', fontSize: 16 }}>Content</Typography>
-                        <TextField
-                            fullWidth
-                            multiline
-                            rows={6}
-                            id="blogcontent"
-                            name="blogcontent"
-                            value={blogData.blogcontent}
-                            onChange={handleChange}
-                            InputLabelProps={{ shrink: true }} // Adjusting InputLabelProps
-                        />
-                    </Grid>                    
+                            <Typography variant="subtitle1" sx={{ fontWeight: 'bold', fontSize: 16 }}>Content</Typography>
+                            <TextField
+                                fullWidth
+                                multiline
+                                rows={6}
+                                id="blogcontent"
+                                name="blogcontent"
+                                value={blogData.blogcontent}
+                                onChange={handleChange}
+                                InputLabelProps={{ shrink: true }} // Adjusting InputLabelProps
+                            />
+                        </Grid>
                         <Grid item xs={12} sx={{ mt: 2 }}>
-                        <Typography variant="subtitle1" sx={{ fontWeight: 'bold', fontSize: 16 }}>Category</Typography>
-                        <Select
-                        fullWidth
-                        id="blogcategory"
-                        name="blogcategory"
-                        value={blogData.blogcategory}
-                        onChange={handleChange}
-                        displayEmpty
-                        InputLabelProps={{ shrink: true }}
-                    >
-                        <MenuItem value="" disabled>
-                            Select category
-                        </MenuItem>
-                        <MenuItem value="Travel">Travel</MenuItem>
-                        <MenuItem value="Spirituality">Spirituality</MenuItem>
-                        <MenuItem value="Mythology">Mythology</MenuItem>
-                        <MenuItem value="Food">Food and Cooking</MenuItem>
-                        <MenuItem value="Lifestyle">Lifestyle</MenuItem>
-                        <MenuItem value="Technology">Technology</MenuItem>
-                        <MenuItem value="Parenting">Parenting</MenuItem>
-                        <MenuItem value="Finance">Finance and Money Management</MenuItem>
-                        <MenuItem value="Health">Health and Wellness</MenuItem>
-                        <MenuItem value="DIY">DIY and Crafts</MenuItem>
-                        <MenuItem value="Entertainment">Entertainment</MenuItem>
-                        <MenuItem value="PersonalFinance">Personal Finance</MenuItem>
-                        <MenuItem value="Business">Business and Entrepreneurship</MenuItem>
-                        <MenuItem value="Photography">Photography</MenuItem>
-                        <MenuItem value="Gaming">Gaming</MenuItem>
-                        <MenuItem value="Home">Home and Garden</MenuItem>
-                        <MenuItem value="Education">Education</MenuItem>
-                        <MenuItem value="Politics">Politics and Current Events</MenuItem>
-                        <MenuItem value="Relationships">Relationships</MenuItem>
-                        <MenuItem value="Sports">Sports</MenuItem>
-                        <MenuItem value="Environmentalism">Environmentalism and Sustainability</MenuItem>
-                        <MenuItem value="Writing">Writing and Blogging</MenuItem>
-                    </Select>          
-                    </Grid>
+                            <Typography variant="subtitle1" sx={{ fontWeight: 'bold', fontSize: 16 }}>Category</Typography>
+                            <Select
+                                fullWidth
+                                id="blogcategory"
+                                name="blogcategory"
+                                value={blogData.blogcategory}
+                                onChange={handleChange}
+                                displayEmpty
+                                InputLabelProps={{ shrink: true }}
+                            >
+                                <MenuItem value="" disabled>
+                                    Select category
+                                </MenuItem>
+                                <MenuItem value="Travel">Travel</MenuItem>
+                                <MenuItem value="Spirituality">Spirituality</MenuItem>
+                                <MenuItem value="Mythology">Mythology</MenuItem>
+                                <MenuItem value="Food">Food and Cooking</MenuItem>
+                                <MenuItem value="Lifestyle">Lifestyle</MenuItem>
+                                <MenuItem value="Technology">Technology</MenuItem>
+                                <MenuItem value="Parenting">Parenting</MenuItem>
+                                <MenuItem value="Finance">Finance and Money Management</MenuItem>
+                                <MenuItem value="Health">Health and Wellness</MenuItem>
+                                <MenuItem value="DIY">DIY and Crafts</MenuItem>
+                                <MenuItem value="Entertainment">Entertainment</MenuItem>
+                                <MenuItem value="PersonalFinance">Personal Finance</MenuItem>
+                                <MenuItem value="Business">Business and Entrepreneurship</MenuItem>
+                                <MenuItem value="Photography">Photography</MenuItem>
+                                <MenuItem value="Gaming">Gaming</MenuItem>
+                                <MenuItem value="Home">Home and Garden</MenuItem>
+                                <MenuItem value="Education">Education</MenuItem>
+                                <MenuItem value="Politics">Politics and Current Events</MenuItem>
+                                <MenuItem value="Relationships">Relationships</MenuItem>
+                                <MenuItem value="Sports">Sports</MenuItem>
+                                <MenuItem value="Environmentalism">Environmentalism and Sustainability</MenuItem>
+                                <MenuItem value="Writing">Writing and Blogging</MenuItem>
+                            </Select>
+                        </Grid>
                         <Grid item xs={12} sx={{ mt: 2 }}>
                             <input
                                 accept="image/*"
@@ -220,7 +220,9 @@ const AddBlog = () => {
                 </form>
             </Paper>
 
-            <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleSnackbarClose}>
+            <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleSnackbarClose}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }} // Adjust anchor origin for mobile devices
+            >
                 <MuiAlert elevation={6} variant="filled" onClose={handleSnackbarClose} severity={snackbarSeverity}>
                     {snackbarMessage}
                 </MuiAlert>

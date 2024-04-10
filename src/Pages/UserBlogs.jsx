@@ -324,7 +324,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { getUserBlogs } from '../Services/profileService';
-import { deleteBlog, updateBlog,updateImage } from '../Services/blogService';
+import { deleteBlog, updateBlog, updateImage } from '../Services/blogService';
 import { Typography, CircularProgress, Card, CardContent, Button, Menu, MenuItem, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar, TextField } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -451,8 +451,8 @@ const UserBlog = () => {
 
                 console.log("Updated Blog Data:", updatedBlogData);
 
-                 // Check if image is updated
-                 if (updatedBlogImage) {
+                // Check if image is updated
+                if (updatedBlogImage) {
                     const response = await updateImage(blogToUpdate._id, updatedBlogImage);
                     if (!response.ok) {
                         throw new Error('Failed to update image');
@@ -495,6 +495,12 @@ const UserBlog = () => {
         <div>
             {loading ? (
                 <CircularProgress />
+            ) : userBlogs.length === 0 ? ( // Check if userBlogs array is empty
+                <div >
+                    <Typography variant="h4" style={{ textAlign: 'center', marginTop: '20px' }}>
+                        No user blogs available
+                    </Typography>
+                </div>
             ) : (
                 <div style={{ marginTop: '20px', marginLeft: 'auto', marginRight: 'auto', maxWidth: '800px' }}>
                     {userBlogs.map(blog => (
