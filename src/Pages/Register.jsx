@@ -652,7 +652,7 @@ const Register = () => {
                 }}
                 disableBackdropClick // Disable backdrop click
             >
-                <Box
+                <Box  className="otp-modal-box"
                     sx={{
                         position: 'absolute',
                         top: '50%',
@@ -666,7 +666,7 @@ const Register = () => {
                     }}
                 >
                     <h2 style={{ marginBottom: '8px', color: 'black' }}>Please check your email for the OTP.</h2>
-                    <h6>Resend otp in {timer}</h6>
+                    <h6 style={{ color: 'black' }}>Resend otp in {timer}</h6>
                     <TextField
                         sx={{ mb: 2 }}
                         label="OTP"

@@ -5,6 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import logo from '../assets/logo-no-background.png'; 
 import { useAuth } from './AuthContext'; 
 import '../assets/footer.css';
+import '../assets/header.css';
 
 const Header = () => {
     const { isLoggedIn } = useAuth(); 
@@ -25,7 +26,7 @@ const Header = () => {
             <Toolbar>
                 <div className="logo">
                     <Link to="/">
-                        <img src={logo} alt="Logo" style={{ height: '40px' }} /> {/* Adjust logo height */}
+                        <img src={logo} alt="Logo" /> {/* Adjust logo height */}
                     </Link>
                 </div>
                 <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}> {/* Align buttons to the right */}

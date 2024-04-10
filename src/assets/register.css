@@ -55,3 +55,22 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+
+
+/* mobile responsive */
+@media screen and (max-width: 600px) {
+    .register-container {
+        width: 90%; /* Adjust width to fill the screen */
+        height: 100%; /* Adjust height to fill the screen */
+        /* display: flex; */
+        justify-content: center;
+        align-items: center;
+        padding: 0 10px; 
+    }
+    .otp-modal-box {
+        width: 100%; /* Adjust width of the modal */
+        max-width: 350px; /* Limit maximum width */
+        padding: 20px; /* Adjust padding */
+        box-sizing: border-box; /* Ensure padding is included in width */
+    }
+}

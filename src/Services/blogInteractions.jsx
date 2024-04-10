@@ -4,10 +4,10 @@ const likeBlog = async (blogId) => {
     try {
         const token = localStorage.getItem('token');
 
-        if (!token) {
-            console.error('Token not found in local storage');
-            return null;
-        }
+        // if (!token) {
+        //     console.error('Token not found in local storage');
+        //     return null;
+        // }
 
         const response = await fetch(`https://blog-node-project.vercel.app/api/int/blogs/${blogId}/like`, {
             method: 'POST',
@@ -15,6 +15,8 @@ const likeBlog = async (blogId) => {
                 'Authorization': `Bearer ${token}`
             },
         });
+        //console.log('Response Status:', response.status);
+
 
         // if (!response) {
         //     throw new Error('Failed to like the blog');
@@ -95,7 +97,7 @@ const bookmarkBlog = async (blogId) => {
         if (!response.ok) {
             throw new Error('Failed to bookmark the blog');
         }
-       return response;
+        return response;
     } catch (error) {
         console.error('Error bookmarking blog:', error);
         // Handle error
@@ -118,4 +120,4 @@ const getLikesForBlog = async (blogId) => {
     }
 };
 
-export { likeBlog,checkLikedBlog, shareBlog, bookmarkBlog, getLikesForBlog };
+export { likeBlog, checkLikedBlog, shareBlog, bookmarkBlog, getLikesForBlog };

@@ -1,6 +1,8 @@
 body {
-    background-color: rgb(111, 178, 236); /* Set the background color to black */
-    color: rgb(255, 250, 250); /* Set text color to white */
+    background-color: rgb(111, 178, 236);
+    /* Set the background color to black */
+    color: rgb(255, 250, 250);
+    /* Set text color to white */
 }
 
 body::-webkit-scrollbar {
@@ -13,11 +15,13 @@ body::-webkit-scrollbar {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url('../assets/andrew-neel-cckf4TsHAuw-unsplash.jpg'); /* Replace with your actual image path */
+    background-image: url('../assets/andrew-neel-cckf4TsHAuw-unsplash.jpg');
+    /* Replace with your actual image path */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    background-attachment: fixed; /* Keep background fixed in place */
+    background-attachment: fixed;
+    /* Keep background fixed in place */
     /*background-color: #f0f0f0; /* Change background color to light gray */
 }
 
@@ -34,7 +38,8 @@ body::-webkit-scrollbar {
 }
 
 .blog-card {
-    position: relative; /* Ensure positioning context for absolute positioning */
+    position: relative;
+    /* Ensure positioning context for absolute positioning */
     width: 100%;
     margin-bottom: 25px;
 }
@@ -67,6 +72,7 @@ body::-webkit-scrollbar {
 .read-more-button {
     margin-top: 10px;
 }
+
 .icon-btn {
     padding: 0;
     margin: 0;
@@ -126,12 +132,14 @@ body::-webkit-scrollbar {
 .comment {
     display: flex;
     align-items: center;
-    margin-bottom: 10px; /* Adjust margin between comments */
+    margin-bottom: 10px;
+    /* Adjust margin between comments */
 }
 
 .comment-content {
     flex: 1;
-    max-width: calc(100% - 100px); /* Limit the width of the comment content */
+    max-width: calc(100% - 100px);
+    /* Limit the width of the comment content */
     /* Adjust as needed based on the maximum width you want for the comment content */
 }
 
@@ -141,12 +149,14 @@ body::-webkit-scrollbar {
 
 .edit-icon,
 .delete-icon {
-    margin-left: 10px; /* Adjust left margin for spacing between icons and comment content */
+    margin-left: 10px;
+    /* Adjust left margin for spacing between icons and comment content */
 }
 
 .edit-icon:hover,
 .delete-icon:hover {
-    background-color: transparent; /* Set background color to transparent on hover */
+    background-color: transparent;
+    /* Set background color to transparent on hover */
 }
 
 .edit-icon:focus,
@@ -156,3 +166,32 @@ body::-webkit-scrollbar {
 
 
 
+/* mobile responsive */
+
+@media screen and (max-width:600px) {
+    .header {
+        font-size: 8px;
+        line-height: 30px;
+    }
+    .blog-username .account-circle {
+        font-size: 10px;
+    }
+
+    .blog-username .username,
+    .blog-username .last-updated {
+        font-size: 8px;
+    }
+    .blog-actions .icon-btn {
+        /* Adjust the size of the icons here */
+        width: 35px;
+        height: 30px;
+    }
+    .blog-actions .like-size{
+        font-size: 10px;
+        color: white;
+    }
+    .blog-card .read-more-button{
+        margin-right: 20px;
+    }
+    
+}

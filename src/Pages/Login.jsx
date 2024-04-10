@@ -551,7 +551,7 @@
 
 
 import * as React from 'react';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Snackbar, Alert as MuiAlert, Modal, Box, TextField, Button, IconButton, InputAdornment, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Components/AuthContext';
@@ -606,7 +606,7 @@ const Login = () => {
         }, 1000);
         return () => clearInterval(interval);
     }, []);
-    
+
 
     useEffect(() => {
         if (timer === 0) {
@@ -768,6 +768,7 @@ const Login = () => {
                 </MuiAlert>
             </Snackbar>
             <Modal
+                className='otp-modal'
                 open={openModal}
                 BackdropProps={{
                     invisible: true // Make backdrop invisible
@@ -799,7 +800,7 @@ const Login = () => {
                         onChange={(e) => setOtp(e.target.value)}
                         fullWidth
                     />
-                    
+
                     <Button variant="contained" onClick={handleOTPVerification}>Verify OTP</Button>
                     <Button variant="outlined" sx={{ mt: 2 }} onClick={() => setOpenModal(false)}>Close</Button> {/* Close button */}
                     {showResendButton && (

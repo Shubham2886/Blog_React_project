@@ -1509,21 +1509,21 @@ const Home = () => {
                     <Card key={blog._id} className="blog-card">
                         <Grid container style={{ position: 'relative' }}>
                             <CardMedia
-                            component="img"
-                            src={blog.blogimage}  // Use the URL directly from the blog object
-                            alt={blog.blogtitle}
+                                component="img"
+                                src={blog.blogimage}
+                                alt={blog.blogtitle}
                             />
-                            <div style={{ position: 'absolute', color: 'white', marginLeft: '8px', marginTop: '8px', top: 0, left: 0, padding: '8px', display: 'flex', flexDirection: 'column', backgroundColor: 'rgba(255, 255, 255, 0)', borderRadius: '8px' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <div className="blog-username" style={{ position: 'absolute', color: 'white', marginLeft: '8px', marginTop: '8px', top: 0, left: 0, padding: '8px', display: 'flex', flexDirection: 'column', backgroundColor: 'rgba(255, 255, 255, 0)', borderRadius: '8px' }}>
+                                <div className="account-circle" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                                     <AccountCircleIcon />
-                                    <Typography variant="subtitle1">{blog.userid.username}</Typography>
+                                    <Typography variant="subtitle1" className="username">{blog.userid.username}</Typography>
                                 </div>
-                                <Typography style={{ marginLeft: '30px' }} variant="subtitle2">{new Date(blog.lastupdated).toLocaleString([], { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' })}</Typography>
+                                <Typography className="last-updated" style={{ marginLeft: '30px' }} variant="subtitle2">{new Date(blog.lastupdated).toLocaleString([], { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' })}</Typography>
                             </div>
                         </Grid>
                         <CardContent>
                             <div className="blog-header">
-                                <Typography variant="h4" className="blog-title" style={{fontWeight: 'bold'}}>
+                                <Typography variant="h4" className="blog-title" style={{ fontWeight: 'bold' }}>
                                     {blog.blogtitle}
                                 </Typography>
                                 <hr></hr>
@@ -1538,7 +1538,7 @@ const Home = () => {
                                     <Fab aria-label="bookmark" onClick={() => handleBookmark(blog._id)} className="icon-btn" style={{ marginRight: '8px' }}>
                                         <BookmarkIcon />
                                     </Fab>
-                                    {likesCountMap[blog._id] > 0 && <Typography variant="body2">{likesCountMap[blog._id]} Likes</Typography>}
+                                    {likesCountMap[blog._id] > 0 && <Typography sx={{color:'white'}} className='like-size' variant="body2">{likesCountMap[blog._id]} Likes</Typography>}
                                 </div>
                             </div>
                             <Typography
@@ -1549,24 +1549,24 @@ const Home = () => {
                                 Category: {blog.blogcategory}
                             </Typography>
                             <Typography variant="body1" className="blog-content">
-                            {expandedBlogId === blog._id ? (
-                                blog.blogcontent.split('\n').map((paragraph, index) => (
-                                    <Typography key={index} variant="body1" paragraph>
-                                        {index === 0 ? (
-                                            <span style={{ fontSize: '24px', fontWeight: 'bold' }}>{paragraph.charAt(0).toUpperCase()}</span>
-                                        ) : (
-                                            paragraph
-                                        )}
-                                        {paragraph.substring(1)}
-                                    </Typography>
-                                ))
-                            ) : (
-                                <>
-                                    <span style={{ fontSize: '24px', fontWeight: 'bold' }}>{blog.blogcontent.substring(0, 1).toUpperCase()}</span>
-                                    {`${blog.blogcontent.substring(1, 200)}...`}
-                                </>
-                            )}
-                        </Typography>
+                                {expandedBlogId === blog._id ? (
+                                    blog.blogcontent.split('\n').map((paragraph, index) => (
+                                        <Typography key={index} variant="body1" paragraph>
+                                            {index === 0 ? (
+                                                <span style={{ fontSize: '24px', fontWeight: 'bold' }}>{paragraph.charAt(0).toUpperCase()}</span>
+                                            ) : (
+                                                paragraph
+                                            )}
+                                            {paragraph.substring(1)}
+                                        </Typography>
+                                    ))
+                                ) : (
+                                    <>
+                                        <span style={{ fontSize: '24px', fontWeight: 'bold' }}>{blog.blogcontent.substring(0, 1).toUpperCase()}</span>
+                                        {`${blog.blogcontent.substring(1, 200)}...`}
+                                    </>
+                                )}
+                            </Typography>
                             {blog.blogcontent.length > 200 && (
                                 <Button
                                     variant="outlined"
@@ -1575,8 +1575,9 @@ const Home = () => {
                                     className="read-more-button"
                                     onClick={() => handleExpandContent(blog._id)}
                                     style={{
-                                        width: '20%',
-                                        marginLeft: '700px',
+                                        display:'inline-',
+                                        width: '30%',
+                                        marginLeft: 'auto',
                                         paddingLeft: '10px'
                                     }}
                                 >

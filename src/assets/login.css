@@ -69,3 +69,26 @@
     border: none !important;
     border-radius: none !important;
 }
+
+
+/* mobile responsive */
+@media screen and (max-width: 600px) {
+    .login-container {
+        width: 100%; /* Adjust width to fill the screen */
+        height: 100%; /* Adjust height to fill the screen */
+        /* display: flex; */
+        justify-content: center;
+        align-items: center;
+        padding: 0 10px; 
+    }
+    .otp-modal {
+        width: 100%; /* Adjust modal width */
+        height: auto; /* Adjust modal height */
+        max-height: 80%; /* Limit maximum height */
+        padding: 20px; /* Add padding for better appearance */
+        background-color: #ffffff; /* Adjust background color if necessary */
+        border-radius: 8px; /* Add border radius for rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+        overflow: auto; /* Allow overflow for content longer than the modal */
+    }
+}
