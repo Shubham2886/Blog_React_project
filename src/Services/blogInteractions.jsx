@@ -4,10 +4,10 @@ const likeBlog = async (blogId) => {
     try {
         const token = localStorage.getItem('token');
 
-        // if (!token) {
-        //     console.error('Token not found in local storage');
-        //     return null;
-        // }
+        if (!token) {
+            console.error('Token not found in local storage');
+            return null;
+        }
 
         const response = await fetch(`https://blog-node-project.vercel.app/api/int/blogs/${blogId}/like`, {
             method: 'POST',
