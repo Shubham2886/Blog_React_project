@@ -114,7 +114,8 @@ const Home = () => {
     const handleLike = async (blogId) => {
         try {
             const response = await likeBlog(blogId);
-            if (!response.ok) {
+            //console.log(response)
+            if (!response || !response.ok) { // Check if response is null/undefined or if response.ok is false
                 setDialogOpen(true);
                 return;
             }
@@ -461,7 +462,9 @@ const Home = () => {
                 autoHideDuration={3000}
                 onClose={() => setSnackbarOpen(false)}
                 message={snackbarMessage}
-            />
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }} // Adjust anchor origin for mobile devices
+            ></Snackbar>
+
             <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
                 <DialogTitle>Please log in</DialogTitle>
                 <DialogContent>

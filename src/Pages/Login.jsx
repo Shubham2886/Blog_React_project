@@ -68,6 +68,7 @@ const Login = () => {
 
     const handleOTPVerification = async () => {
         try {
+            setLoading(true);
             const trimmedotp = otp.trim();
             const response = await fetch('https://blog-node-project.vercel.app/api/auth/verify-login-otp', {
                 method: 'POST',
@@ -102,12 +103,12 @@ const Login = () => {
                 const user = data.user; // Assuming user data is nested under 'user' property
                 if (user && user.id) {
                     localStorage.setItem('currentUser', JSON.stringify(user)); // Store user data
-                    console.log(user); // Log user data
+                    //console.log(user); // Log user data
                 } else {
                     console.error('User data not found or incomplete:', user);
                     // Handle missing or incomplete user data
                 }
-                console.log(data.user);
+                //console.log(data.user);
                 login();
                 setOpen(true); // Open the Snackbar for successful login
                 setTimeout(() => {
@@ -127,6 +128,8 @@ const Login = () => {
         } catch (error) {
             console.error('Error verifying OTP:', error);
             setErrorMessage(error.message || 'An error occurred during OTP verification');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -221,11 +224,6 @@ const Login = () => {
 
     return (
         <div className="login-container">
-            <Snackbar open={errorMessage !== ""} onClose={() => setErrorMessage("")}>
-                <MuiAlert elevation={6} variant="filled" severity="error">
-                    {errorMessage}
-                </MuiAlert>
-            </Snackbar>
             <Modal
                 className='otp-modal'
                 open={openModal}
@@ -259,8 +257,16 @@ const Login = () => {
                         onChange={(e) => setOtp(e.target.value)}
                         fullWidth
                     />
-
-                    <Button variant="contained" onClick={handleOTPVerification}>Verify OTP</Button>
+                    <Button
+                        onClick={handleOTPVerification}
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 1 }}
+                        disabled={loading} // Disable button when loading
+                    >
+                        {loading ? <CircularProgress size={24} /> : 'Verify OTP'} {/* Show loading spinner if loading */}
+                    </Button>
                     <Button variant="outlined" sx={{ mt: 2 }} onClick={() => setOpenModal(false)}>Close</Button> {/* Close button */}
                     {showResendButton && (
                         <Button
@@ -366,15 +372,6 @@ const Login = () => {
             >
                 <MuiAlert elevation={6} variant="filled" severity="error">
                     {errorMessage}
-                </MuiAlert>
-            </Snackbar>
-            <Snackbar
-                open={openSnackbar}
-                onClose={() => setOpenSnackbar(false)}
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }} // Adjust anchor origin for mobile devices
-            >
-                <MuiAlert elevation={6} variant="filled" severity="success">
-                    {snackbarMessage}
                 </MuiAlert>
             </Snackbar>
 
