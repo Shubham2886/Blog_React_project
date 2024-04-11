@@ -12,7 +12,7 @@ This is a blog website built using React + vite, Material-UI, and Context API fo
 6. [License](#license)
 
 ## Features
-- **User Authentication:** Users can register, login, and logout securely.
+- **User Authentication:** Users can register, login, and logout securely with real time email otp.
 - **Create, Read, Update, Delete (CRUD) Operations:** Users can create, read, update, and delete their blogs.
 - **Comments:** Users can add, edit, and delete comments on blogs.
 - **Likes:** Users can like blogs.
