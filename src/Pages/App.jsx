@@ -24,7 +24,7 @@ const App = () => {
         // Simulate some asynchronous initialization tasks
         setTimeout(() => {
             setLoading(false);
-        }, 2000); // Simulate a 2-second loading time
+        }); // Simulate a 2-second loading time
     }, []);
 
     return (
