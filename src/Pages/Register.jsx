@@ -67,6 +67,7 @@ const Register = () => {
 
     const handleOTPVerification = async () => {
         try {
+            setLoading(true); // Set loading state to true
             const trimmedotp = otp.trim();
             const response = await fetch('https://blog-node-project.vercel.app/api/auth/verify-register-otp', {
                 method: 'POST',
@@ -111,6 +112,8 @@ const Register = () => {
         } catch (error) {
             console.error('Error verifying OTP:', error);
             setErrorMessage(error.message || 'An error occurred during OTP verification');
+        } finally {
+            setLoading(false); // Set loading state to false after OTP verification attempt
         }
     };
 
@@ -271,7 +274,17 @@ const Register = () => {
                         fullWidth
                     />
                     <div style={{ display: 'flow', justifyContent: 'space-evenly' }}> {/* Space between buttons */}
-                        <Button variant="contained" onClick={handleOTPVerification} style={{ marginBottom: '14px' }}>Verify OTP</Button>
+                        
+                        <Button
+                            onClick={handleOTPVerification}
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 1 }}
+                            disabled={loading} // Disable button when loading
+                        >
+                            {loading ? <CircularProgress size={24} /> : 'Verify OTP'} {/* Show loading spinner if loading */}
+                        </Button>
                         <Button variant="outlined" sx={{ mt: 2 }} onClick={() => setOpenModal(false)}>Close</Button> {/* Close button */}
                         {showResendButton && (
                             <Button
