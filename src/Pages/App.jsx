@@ -15,6 +15,7 @@ import TermsOfService from './TermsOfService';
 import CircularProgress from '@mui/material/CircularProgress'; // Import CircularProgress from Material-UI
 import UserBlog from './UserBlogs';
 import UserActivity from './UserActivity';
+import BookmarkBlog from './BookmarkBlog';
 
 const App = () => {
     const [loading, setLoading] = useState(true);
@@ -47,6 +48,7 @@ const App = () => {
                         <Route path="/user-activity" element={<UserActivity />} />
                         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                         <Route path="/terms-of-service" element={<TermsOfService />} />
+                        <Route path="/user-bookmark" element={<BookmarkBlog />} />
                     </Routes>
                     <Footer />
                 </div>

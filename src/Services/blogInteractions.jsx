@@ -120,4 +120,39 @@ const getLikesForBlog = async (blogId) => {
     }
 };
 
-export { likeBlog, checkLikedBlog, shareBlog, bookmarkBlog, getLikesForBlog };
+const getBookmarkBlog = async () => {
+    try {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            console.error('Token not found in local storage');
+            return null;
+        }
+
+        const response = await fetch('https://blog-node-project.vercel.app/api/int/bookmarked-blogs', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+        });
+
+        //console.log('Response status:', response.status); // Log response status
+
+        if (!response.ok) {
+            throw new Error('Failed to get bookmarked blogs');
+        }
+
+        const data = await response.json();
+        //console.log('Data:', data); // Log the parsed JSON data
+        // Return the entire data object instead of just bookmarkedBlogs
+        return data;
+    } catch (error) {
+        console.error('Error getting bookmarked blogs:', error);
+        // Handle error
+        return null;
+    }
+};
+
+
+export { likeBlog, checkLikedBlog, shareBlog, bookmarkBlog, getLikesForBlog, getBookmarkBlog };
+

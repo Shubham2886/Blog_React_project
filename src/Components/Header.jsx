@@ -65,6 +65,7 @@ const Header = () => {
                       <MenuItem key="profile" onClick={handleClose}><Link to="/user-profile">User Profile</Link></MenuItem>,
                       <MenuItem key="userBlogs" onClick={handleClose}><Link to="/user-blogs">Your Blogs</Link></MenuItem>,
                       <MenuItem key="userActivity" onClick={handleClose}><Link to="/user-activity">Your Activity</Link></MenuItem>,
+                      <MenuItem key="userBookmark" onClick={handleClose}><Link to="/user-bookmark">Your Bookmark</Link></MenuItem>,
                       <MenuItem key="logout" onClick={handleClose}><Link to="/logout">Logout</Link></MenuItem>
                     ]
                   ) : (

@@ -85,7 +85,7 @@ const Login = () => {
             }
 
             const data = await response.json();
-            console.log(data);
+            //console.log(data);
             if (data.status === "ok") {
                 // Handle successful OTP verification
 

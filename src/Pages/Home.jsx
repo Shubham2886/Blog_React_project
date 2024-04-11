@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardMedia, Typography, Button, Fab, Snackbar, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Avatar, Grid, Paper, IconButton,CircularProgress } from "@mui/material";
+import { Card, CardContent, CardMedia, Typography, Button, Fab, Snackbar, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Avatar, Grid, Paper, IconButton, CircularProgress } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
@@ -345,96 +345,98 @@ const Home = () => {
                 <h1>Welcome to Daily Blogs!</h1>
             </div>
             {isLoading ? (
-                <CircularProgress color="inherit"/>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                    <CircularProgress />
+                </div>
             ) : (
-            <div className="blog-container">
-                {blogs.map(blog => (
-                    <Card key={blog._id} className="blog-card">
-                        <Grid container style={{ position: 'relative' }}>
-                            <CardMedia
-                                component="img"
-                                src={blog.blogimage}
-                                alt={blog.blogtitle}
-                            />
-                            <div className="blog-username" style={{ position: 'absolute', color: 'white', marginLeft: '8px', marginTop: '8px', top: 0, left: 0, padding: '8px', display: 'flex', flexDirection: 'column', backgroundColor: 'rgba(255, 255, 255, 0)', borderRadius: '8px' }}>
-                                <div className="account-circle" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                    <AccountCircleIcon />
-                                    <Typography variant="subtitle1" className="username">{blog.userid.username}</Typography>
+                <div className="blog-container">
+                    {blogs.map(blog => (
+                        <Card key={blog._id} className="blog-card">
+                            <Grid container style={{ position: 'relative' }}>
+                                <CardMedia
+                                    component="img"
+                                    src={blog.blogimage}
+                                    alt={blog.blogtitle}
+                                />
+                                <div className="blog-username" style={{ position: 'absolute', color: 'white', marginLeft: '8px', marginTop: '8px', top: 0, left: 0, padding: '8px', display: 'flex', flexDirection: 'column', backgroundColor: 'rgba(255, 255, 255, 0)', borderRadius: '8px' }}>
+                                    <div className="account-circle" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <AccountCircleIcon />
+                                        <Typography variant="subtitle1" className="username">{blog.userid.username}</Typography>
+                                    </div>
+                                    <Typography className="last-updated" style={{ marginLeft: '30px' }} variant="subtitle2">{new Date(blog.lastupdated).toLocaleString([], { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' })}</Typography>
                                 </div>
-                                <Typography className="last-updated" style={{ marginLeft: '30px' }} variant="subtitle2">{new Date(blog.lastupdated).toLocaleString([], { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' })}</Typography>
-                            </div>
-                        </Grid>
-                        <CardContent>
-                            <div className="blog-header">
-                                <Typography variant="h4" className="blog-title" style={{ fontWeight: 'bold' }}>
-                                    {blog.blogtitle}
-                                </Typography>
-                                <hr></hr>
-                                <div className="blog-actions">
+                            </Grid>
+                            <CardContent>
+                                <div className="blog-header">
+                                    <Typography variant="h4" className="blog-title" style={{ fontWeight: 'bold' }}>
+                                        {blog.blogtitle}
+                                    </Typography>
+                                    <hr></hr>
+                                    <div className="blog-actions">
 
-                                    <Fab aria-label="like" onClick={() => handleLike(blog._id)} style={{ marginRight: '8px' }} className={`icon-btn ${likedStatusMap[blog._id] === true ? 'liked' : ''}`}>
-                                        <FavoriteIcon style={{ color: likedStatusMap[blog._id] === true ? 'red' : 'inherit' }} />
-                                    </Fab>
-                                    <Fab aria-label="share" onClick={() => handleShare(blog._id)} className="icon-btn" style={{ marginRight: '8px' }}>
-                                        <ShareIcon />
-                                    </Fab>
-                                    <Fab aria-label="bookmark" onClick={() => handleBookmark(blog._id)} className="icon-btn" style={{ marginRight: '8px' }}>
-                                        <BookmarkIcon />
-                                    </Fab>
-                                    {likesCountMap[blog._id] > 0 && <Typography sx={{color:'white'}} className='like-size' variant="body2">{likesCountMap[blog._id]} Likes</Typography>}
+                                        <Fab aria-label="like" onClick={() => handleLike(blog._id)} style={{ marginRight: '8px' }} className={`icon-btn ${likedStatusMap[blog._id] === true ? 'liked' : ''}`}>
+                                            <FavoriteIcon style={{ color: likedStatusMap[blog._id] === true ? 'red' : 'inherit' }} />
+                                        </Fab>
+                                        <Fab aria-label="share" onClick={() => handleShare(blog._id)} className="icon-btn" style={{ marginRight: '8px' }}>
+                                            <ShareIcon />
+                                        </Fab>
+                                        <Fab aria-label="bookmark" onClick={() => handleBookmark(blog._id)} className="icon-btn" style={{ marginRight: '8px' }}>
+                                            <BookmarkIcon />
+                                        </Fab>
+                                        {likesCountMap[blog._id] > 0 && <Typography sx={{ color: 'white' }} className='like-size' variant="body2">{likesCountMap[blog._id]} Likes</Typography>}
+                                    </div>
                                 </div>
-                            </div>
-                            <Typography
-                                variant="subtitle1"
-                                className="blog-category"
-                                style={{ marginBottom: '8px', color: '#ff5722', fontWeight: 'bold', textAlign: 'justify' }}
-                            >
-                                Category: {blog.blogcategory}
-                            </Typography>
-                            <Typography variant="body1" className="blog-content">
-                                {expandedBlogId === blog._id ? (
-                                    blog.blogcontent.split('\n').map((paragraph, index) => (
-                                        <Typography key={index} variant="body1" paragraph>
-                                            {index === 0 ? (
-                                                <span style={{ fontSize: '24px', fontWeight: 'bold' }}>{paragraph.charAt(0).toUpperCase()}</span>
-                                            ) : (
-                                                paragraph
-                                            )}
-                                            {paragraph.substring(1)}
-                                        </Typography>
-                                    ))
-                                ) : (
-                                    <>
-                                        <span style={{ fontSize: '24px', fontWeight: 'bold' }}>{blog.blogcontent.substring(0, 1).toUpperCase()}</span>
-                                        {`${blog.blogcontent.substring(1, 200)}...`}
-                                    </>
-                                )}
-                            </Typography>
-                            {blog.blogcontent.length > 200 && (
-                                <Button
-                                    variant="outlined"
-                                    color="primary"
-                                    size="small"
-                                    className="read-more-button"
-                                    onClick={() => handleExpandContent(blog._id)}
-                                    style={{
-                                        display:'inline-',
-                                        width: '30%',
-                                        marginLeft: 'auto',
-                                        paddingLeft: '10px'
-                                    }}
+                                <Typography
+                                    variant="subtitle1"
+                                    className="blog-category"
+                                    style={{ marginBottom: '8px', color: '#ff5722', fontWeight: 'bold', textAlign: 'justify' }}
                                 >
-                                    {expandedBlogId === blog._id ? 'Show less' : 'Read more'}
-                                </Button>
-                            )}
-                        </CardContent>
-                        <Button onClick={() => handleOpenCommentModal(blog._id)}>View Comments</Button>
+                                    Category: {blog.blogcategory}
+                                </Typography>
+                                <Typography variant="body1" className="blog-content">
+                                    {expandedBlogId === blog._id ? (
+                                        blog.blogcontent.split('\n').map((paragraph, index) => (
+                                            <Typography key={index} variant="body1" paragraph>
+                                                {index === 0 ? (
+                                                    <span style={{ fontSize: '24px', fontWeight: 'bold' }}>{paragraph.charAt(0).toUpperCase()}</span>
+                                                ) : (
+                                                    paragraph
+                                                )}
+                                                {paragraph.substring(1)}
+                                            </Typography>
+                                        ))
+                                    ) : (
+                                        <>
+                                            <span style={{ fontSize: '24px', fontWeight: 'bold' }}>{blog.blogcontent.substring(0, 1).toUpperCase()}</span>
+                                            {`${blog.blogcontent.substring(1, 200)}...`}
+                                        </>
+                                    )}
+                                </Typography>
+                                {blog.blogcontent.length > 200 && (
+                                    <Button
+                                        variant="outlined"
+                                        color="primary"
+                                        size="small"
+                                        className="read-more-button"
+                                        onClick={() => handleExpandContent(blog._id)}
+                                        style={{
+                                            display: 'inline-',
+                                            width: '30%',
+                                            marginLeft: 'auto',
+                                            paddingLeft: '10px'
+                                        }}
+                                    >
+                                        {expandedBlogId === blog._id ? 'Show less' : 'Read more'}
+                                    </Button>
+                                )}
+                            </CardContent>
+                            <Button onClick={() => handleOpenCommentModal(blog._id)}>View Comments</Button>
 
-                    </Card>
-                    
-                ))}
-                
-            </div>
+                        </Card>
+
+                    ))}
+
+                </div>
             )}
             <Pagination
                 count={totalPages}

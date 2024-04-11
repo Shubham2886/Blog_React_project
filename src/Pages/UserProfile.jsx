@@ -39,7 +39,9 @@ const UserProfile = () => {
     return (
         <div>
             {loading ? (
-                <CircularProgress />
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                    <CircularProgress />
+                </div>
             ) : profile ? (
                 <div className="user-profile"> {/* Apply the CSS class */}
                     <Typography variant="h2" className="profile-heading">

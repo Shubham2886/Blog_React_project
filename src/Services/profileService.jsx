@@ -19,7 +19,7 @@ const getUserProfile = async () => {
             throw new Error('Failed to get user profile');
         }
         const data = await response.json();
-        console.log('User profile data:', data); // Log the data received from the server
+        //console.log('User profile data:', data); // Log the data received from the server
         return data; // Corrected to return the data directly
     } catch (error) {
         console.error('Error getting user profile:', error);
@@ -95,7 +95,7 @@ const getUserBlogs = async () => {
             throw new Error('Failed to get user blogs');
         }
         const data = await response.json();
-        console.log(data.data);
+        //console.log(data.data);
         // Handle successful response
         return data; // Assuming the response contains an array of user blogs
     } catch (error) {

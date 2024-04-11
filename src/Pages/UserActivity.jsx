@@ -33,7 +33,9 @@ const UserActivity = () => {
         <div className="userActivityContainer">
             <Typography variant="h4" className="activityHeading" gutterBottom>User Activity</Typography>
             {loading ? (
-                <CircularProgress />
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                    <CircularProgress />
+                </div>
             ) : activities.length > 0 ? (
                 <List className="activityList">
                     {activities.map(activity => (
@@ -42,8 +44,8 @@ const UserActivity = () => {
                                 primary={`${activity.username} ${activity.action}`}
                                 secondary={new Date(activity.timestamp).toLocaleString()}
                                 classes={{
-                                  primary: 'activityListItemTextPrimary',
-                                  secondary: 'activityListItemTextSecondary'
+                                    primary: 'activityListItemTextPrimary',
+                                    secondary: 'activityListItemTextSecondary'
                                 }}
                             />
                         </ListItem>

@@ -173,16 +173,18 @@ const UserBlog = () => {
     return (
         <div style={{ marginTop: '20px', textAlign: 'center' }}>
             {loading ? (
-                <CircularProgress />
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                    <CircularProgress />
+                </div>
             ) : userBlogs.length === 0 ? (
                 <div style={{ marginTop: '20px' }}>
                     <Typography variant="h4" style={{ marginBottom: '20px' }}>
                         No user blogs available
                     </Typography>
-                    <Button component={Link} to="/addblog" variant="contained" color="primary" style={{ marginRight: '10px',marginBottom:'219px' }}>
+                    <Button component={Link} to="/addblog" variant="contained" color="primary" style={{ marginRight: '10px', marginBottom: '219px' }}>
                         Create New Blog
                     </Button>
-                    <Button component={Link} to="/" variant="outlined" color="primary" style={{ marginRight: '10px',marginBottom:'219px' }}>
+                    <Button component={Link} to="/" variant="outlined" color="primary" style={{ marginRight: '10px', marginBottom: '219px' }}>
                         Back to Home
                     </Button>
                 </div>

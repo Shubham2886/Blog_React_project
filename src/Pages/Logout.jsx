@@ -51,7 +51,9 @@ const Logout = () => {
       </Snackbar>
       {loading ? (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-          <CircularProgress /> {/* Display CircularProgress while logging out */}
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+            <CircularProgress />
+          </div> {/* Display CircularProgress while logging out */}
           <p style={{ marginTop: '20px' }}>Please visit again!</p> {/* Display message */}
         </div>
       ) : (
